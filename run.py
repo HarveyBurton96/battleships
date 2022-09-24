@@ -20,22 +20,28 @@ def login_choice():
     """
     Allows the user to choose the appropriate login for them
     """
-    print('Login [L]')
-    print('Create an account [C]')
-    print('Log in as a guess [G]\n')
+    x=0 
+    while x == 0:
+        print('Please select a loggin option\n')
+        print('Login [L]')
+        print('Create an account [C]')
+        print('Log in as a guess [G]\n')
 
-    option = input('Please enter your option here:')
+        option = input('Please enter your option here:\n')
 
-    if option == 'L':
-        print('login()')
-    elif option == 'C':
-        print('create_login()')
-    elif option == 'G':
-        print('start_battleships()')
-    else:
-        raise ValueError(
-            f"Please check as the input you have supplied is not an option you enter: {option}"
-        )
+        if option == 'L':
+            print('login()')
+            x += 1
+        elif option == 'C':
+            print('create_login()')
+            x += 1
+        elif option == 'G':
+            print('start_battleships()')
+            x += 1
+        else:
+            print(f"Please check as the input you have supplied is not a valid option you have enter: {option}, please try again.\n")
+
+        
 
 
 def main():
