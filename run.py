@@ -16,4 +16,33 @@ login = SHEET.worksheet('login')
 
 data = login.get_all_values()
 
-print(data)
+def login_choice():
+    """
+    Allows the user to choose the appropriate login for them
+    """
+    print('Login [L]')
+    print('Create an account [C]')
+    print('Log in as a guess [G]\n')
+
+    option = input('Please enter your option here:')
+
+    if option == 'L':
+        print('login()')
+    elif option == 'C':
+        print('create_login()')
+    elif option == 'G':
+        print('start_battleships()')
+    else:
+        raise ValueError(
+            f"Please check as the input you have supplied is not an option you enter: {option}"
+        )
+
+
+def main():
+    """
+    Runs all functions
+    """
+    login_choice()
+
+print('Welcome lets play Battleships!')
+main()
