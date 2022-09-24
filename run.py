@@ -16,6 +16,8 @@ login = SHEET.worksheet('login')
 
 data = login.get_all_values()
 
+print(data)
+
 def login_choice():
     """
     Allows the user to choose the appropriate login for them
@@ -30,7 +32,7 @@ def login_choice():
         option = input('Please enter your option here:\n')
 
         if option == 'L':
-            print('login()')
+            log_in()
             x += 1
         elif option == 'C':
             print('create_login()')
@@ -41,7 +43,15 @@ def login_choice():
         else:
             print(f"Please check as the input you have supplied is not a valid option you have enter: {option}, please try again.\n")
 
-        
+
+def log_in():
+    """
+    For users with an existing account will enter there details here 
+    """
+    username = input('Please enter your username here:\n')
+    password = input('Please enter your password here:\n')
+
+    
 
 
 def main():
