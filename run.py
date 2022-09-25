@@ -12,12 +12,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('battleships')
 
-login = SHEET.worksheet('login')
-
-data = login.col_values(1)
-
-print(data)
-
 def login_choice():
     """
     Allows the user to choose the appropriate login for them
@@ -51,20 +45,35 @@ def log_in():
     username = input('Please enter your username here:\n')
     password = input('Please enter your password here:\n')
 
+    #need to add check it excists 
+    
+
 
 def create_login():
     """
     This function will check if a username is already in use and if not will save the username and password to the spreadsheet
     """
-    
+
     print('Thank you for creating an account')
 
-    username = input('Please enter your username here:\n')
-    if username in data:
-        print(f"Please select another username as '{username}' has already been selected.")
+    login = SHEET.worksheet('login')
+
+    username_data = login.col_values(1)
+
+    x = 0
+
+    while x==0:
+        username = input('Please enter your username here:\n')
+        x +=1
+        if username in username_data:
+            print(f"Please select another username as '{username}' has already been selected.\n")
+            x -=1
 
     password = input('Please enter your password here:\n')
 
+    new_user = [username, password]
+
+    login.append_row(new_user)
 
 def main():
     """
