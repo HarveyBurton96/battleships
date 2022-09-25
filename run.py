@@ -26,16 +26,19 @@ def login_choice():
         option = input('Please enter your option here:\n')
 
         if option == 'L':
-            log_in()
+            user = log_in()
             x += 1
+
         elif option == 'C':
-            create_login()
+            user = create_login()
             x += 1
         elif option == 'G':
-            print('start_battleships()')
             x += 1
+            user = 'Guess'
         else:
             print(f"Please check as the input you have supplied is not a valid option you have enter: {option}, please try again.\n")
+
+        return user
 
 
 def log_in():
@@ -51,7 +54,6 @@ def log_in():
 
     while x == 0:
         username = input('Please enter your username here:\n')
-        #need to add check it excists
 
         if username in username_data:
             x += 1
@@ -69,6 +71,8 @@ def log_in():
             y += 1
         else:
             print(f"Password: {password}, is not recognised please try again")
+
+    return username
 
 
 def create_login():
@@ -97,11 +101,15 @@ def create_login():
 
     login.append_row(new_user)
 
+    return username
+
 def main():
     """
     Runs all functions
     """
-    login_choice()
+    user = login_choice()
+    print(user)
+    
 
 print('Welcome lets play Battleships!')
 main()
