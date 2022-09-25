@@ -42,11 +42,33 @@ def log_in():
     """
     For users with an existing account will enter there details here 
     """
-    username = input('Please enter your username here:\n')
-    password = input('Please enter your password here:\n')
+    x = 0 
 
-    #need to add check it excists 
-    
+    login = SHEET.worksheet('login')
+
+    username_data = login.col_values(1)
+    password_data = login.col_values(2)
+
+    while x == 0:
+        username = input('Please enter your username here:\n')
+        #need to add check it excists
+
+        if username in username_data:
+            x += 1
+        else:
+            print(f"Username: '{username}', is not recognised please try again\n")
+
+    username_place = username_data.index(username)
+
+    y = 0
+    while y == 0:
+        password = input('Please enter your password here:\n')
+
+        if password == password_data[username_place]:
+            print(f"welcome back {username}")
+            y += 1
+        else:
+            print(f"Password: {password}, is not recognised please try again")
 
 
 def create_login():
@@ -62,12 +84,12 @@ def create_login():
 
     x = 0
 
-    while x==0:
+    while x == 0:
         username = input('Please enter your username here:\n')
-        x +=1
+        x += 1
         if username in username_data:
             print(f"Please select another username as '{username}' has already been selected.\n")
-            x -=1
+            x -= 1
 
     password = input('Please enter your password here:\n')
 
