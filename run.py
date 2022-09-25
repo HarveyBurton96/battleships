@@ -103,12 +103,19 @@ def create_login():
 
     return username
 
+def play_battleship():
+    print('Lets play battleships!')
+    R1_C1 = R1_C2 = R1_C3 = R1_C4 = R1_C5 = R2_C1 = R2_C2 = R2_C3 = R2_C4 = R2_C5 = R3_C1 = R3_C2 = R3_C3 = R3_C4 = R3_C5 = R4_C1 = R4_C2 = R4_C3 = R4_C4 = R4_C5 = R5_C1 = R5_C2 = R5_C3 = R5_C4 = R5_C5 ='-'
+
+    print(f"{R1_C1} {R1_C2} {R1_C3} {R1_C4} {R1_C5} \n{R2_C1} {R2_C2} {R2_C3} {R2_C4} {R2_C5} \n{R3_C1} {R3_C2} {R3_C3} {R3_C4} {R3_C5} \n{R4_C1} {R4_C2} {R4_C3} {R4_C4} {R4_C5} \n{R5_C1} {R5_C2} {R5_C3} {R5_C4} {R5_C5}")
+
 def main():
     """
     Runs all functions
     """
     user = login_choice()
     print(user)
+    play_battleship()
     
 
 print('Welcome lets play Battleships!')
