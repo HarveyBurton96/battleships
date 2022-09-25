@@ -14,7 +14,7 @@ SHEET = GSPREAD_CLIENT.open('battleships')
 
 login = SHEET.worksheet('login')
 
-data = login.get_all_values()
+data = login.col_values(1)
 
 print(data)
 
@@ -35,7 +35,7 @@ def login_choice():
             log_in()
             x += 1
         elif option == 'C':
-            print('create_login()')
+            create_login()
             x += 1
         elif option == 'G':
             print('start_battleships()')
@@ -51,7 +51,19 @@ def log_in():
     username = input('Please enter your username here:\n')
     password = input('Please enter your password here:\n')
 
+
+def create_login():
+    """
+    This function will check if a username is already in use and if not will save the username and password to the spreadsheet
+    """
     
+    print('Thank you for creating an account')
+
+    username = input('Please enter your username here:\n')
+    if username in data:
+        print(f"Please select another username as '{username}' has already been selected.")
+
+    password = input('Please enter your password here:\n')
 
 
 def main():
