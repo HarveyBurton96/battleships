@@ -105,12 +105,13 @@ def create_login():
 
 def play_battleship():
     print('Lets play battleships!')
-    C1_R1 = C1_R2 = C1_R3 = C1_R4 = C1_R5 = C2_R1 = C2_R2 = C2_R3 = C2_R4 = C2_R5 = C3_R1 = C3_R2 = C3_R3 = C3_R4 = C3_R5 = C4_R1 = C4_R2 = C4_R3 = C4_R4 = C4_R5 = C5_R1 = C5_R2 = C5_R3 = C5_R4 = C5_R5 ='-'
+    X1_Y1 = X1_Y2 = X1_Y3 = X1_Y4 = X1_Y5 = X2_Y1 = X2_Y2 = X2_Y3 = X2_Y4 = X2_Y5 = X3_Y1 = X3_Y2 = X3_Y3 = X3_Y4 = X3_Y5 = X4_Y1 = X4_Y2 = X4_Y3 = X4_Y4 = X4_Y5 = X5_Y1 = X5_Y2 = X5_Y3 = X5_Y4 = X5_Y5 = '-'
 
-    print(f"\n  5 {C1_R5} {C2_R5} {C3_R5} {C4_R5} {C5_R5} \n  4 {C1_R4} {C2_R4} {C3_R4} {C4_R4} {C5_R4} \nR 3 {C1_R3} {C2_R3} {C3_R3} {C4_R3} {C5_R3} \n  2 {C1_R2} {C2_R2} {C3_R2} {C4_R2} {C5_R2} \n  1 {C1_R1} {C2_R1} {C3_R1} {C4_R1} {C5_R1} \n    1 2 3 4 5 \n        C\n")
+    print(f"\n  5 {X1_Y5} {X2_Y5} {X3_Y5} {X4_Y5} {X5_Y5} \n  4 {X1_Y4} {X2_Y4} {X3_Y4} {X4_Y4} {X5_Y4} \ny 3 {X1_Y3} {X2_Y3} {X3_Y3} {X4_Y3} {X5_Y3} \n  2 {X1_Y2} {X2_Y2} {X3_Y2} {X4_Y2} {X5_Y2} \n  1 {X1_Y1} {X2_Y1} {X3_Y1} {X4_Y1} {X5_Y1} \n    1 2 3 4 5 \n        x\n")
 
     print('Make your move')
-    move = input("Please enter your move here, with column then row seperated by a ',':\n")
+    print('To quit [Q]')
+    move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
 def main():
     """
