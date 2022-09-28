@@ -116,6 +116,8 @@ def play_battleship():
     xcolumn = ['   ', '1', '2', '3', '4', '5']
     xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
 
+    board_layout = [xcolumn, board1, board2, board3, board4, board5, xcolumn2]
+
     print(*board5, sep = ' ')
     print(*board4, sep = ' ')
     print(*board3, sep = ' ')
@@ -124,6 +126,35 @@ def play_battleship():
     print(*xcolumn, sep = ' ')
     print(*xcolumn2, sep = ' ')
 
+    computer_ships = ['1,2', '3,1', '4,5', '3,3', '2,2']
+    move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
+
+    if move in computer_ships:
+        computer_ships.remove(move)
+        hit(move, board_layout)
+
+    
+def hit(data, board_data):
+    """ Take the users input and edit the board data to chnage a - to H """
+    xandy = data.split(',')
+    print(xandy)
+    x = int(xandy[0])
+    y = int(xandy[1])
+
+    print(x)
+    print(y)
+
+    board_data[y][x] = 'H'
+
+    print(*board_data[5], sep = ' ')
+    print(*board_data[4], sep = ' ')
+    print(*board_data[3], sep = ' ')
+    print(*board_data[2], sep = ' ')
+    print(*board_data[1], sep = ' ')
+    print(*board_data[0], sep = ' ')
+    print(*board_data[6], sep = ' ')
+
+    print(board_data[y][x])
     
 def player_move():
     """takes the user moves and assignes it a hit or miss """
