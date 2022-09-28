@@ -1,4 +1,5 @@
 import gspread
+import random
 from google.oauth2.service_account import Credentials 
 
 SCOPE = [
@@ -104,14 +105,32 @@ def create_login():
     return username
 
 def play_battleship():
-    print('Lets play battleships!')
-    X1_Y1 = X1_Y2 = X1_Y3 = X1_Y4 = X1_Y5 = X2_Y1 = X2_Y2 = X2_Y3 = X2_Y4 = X2_Y5 = X3_Y1 = X3_Y2 = X3_Y3 = X3_Y4 = X3_Y5 = X4_Y1 = X4_Y2 = X4_Y3 = X4_Y4 = X4_Y5 = X5_Y1 = X5_Y2 = X5_Y3 = X5_Y4 = X5_Y5 = '-'
+    """Create new game and resets the board"""
+    print('Lets play battleships!\n')
 
-    print(f"\n  5 {X1_Y5} {X2_Y5} {X3_Y5} {X4_Y5} {X5_Y5} \n  4 {X1_Y4} {X2_Y4} {X3_Y4} {X4_Y4} {X5_Y4} \ny 3 {X1_Y3} {X2_Y3} {X3_Y3} {X4_Y3} {X5_Y3} \n  2 {X1_Y2} {X2_Y2} {X3_Y2} {X4_Y2} {X5_Y2} \n  1 {X1_Y1} {X2_Y1} {X3_Y1} {X4_Y1} {X5_Y1} \n    1 2 3 4 5 \n        x\n")
+    board5 = ['  5', '-', '-', '-', '-', '-']
+    board4 = ['  4', '-', '-', '-', '-', '-']
+    board3 = ['y 3','-', '-', '-', '-', '-']
+    board2 = ['  2','-', '-', '-', '-', '-']
+    board1 = ['  1','-', '-', '-', '-', '-']
+    xcolumn = ['   ', '1', '2', '3', '4', '5']
+    xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
 
+    print(*board5, sep = ' ')
+    print(*board4, sep = ' ')
+    print(*board3, sep = ' ')
+    print(*board2, sep = ' ')
+    print(*board1, sep = ' ')
+    print(*xcolumn, sep = ' ')
+    print(*xcolumn2, sep = ' ')
+
+    
+def player_move():
+    """takes the user moves and assignes it a hit or miss """
     print('Make your move')
     print('To quit [Q]')
     move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
+
 
 def main():
     """
