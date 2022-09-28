@@ -126,12 +126,18 @@ def play_battleship():
     print(*xcolumn, sep = ' ')
     print(*xcolumn2, sep = ' ')
 
-    computer_ships = ['1,2', '3,1', '4,5', '3,3', '2,2']
-    move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
+    computer_ships = []
+    player_ships = []
+    player_move = []
+    computer_move = []
 
-    if move in computer_ships:
-        computer_ships.remove(move)
-        hit(move, board_layout)
+    i = 0
+    while i < 6:
+        player_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
+        computer_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
+        i += 1
+    
+    return player_ships, computer_ships
 
     
 def hit(data, board_data):
@@ -155,7 +161,8 @@ def hit(data, board_data):
     print(*board_data[6], sep = ' ')
 
     print(board_data[y][x])
-    
+
+
 def player_move():
     """takes the user moves and assignes it a hit or miss """
     print('Make your move')
@@ -170,7 +177,7 @@ def main():
     user = login_choice()
     print(user)
     play_battleship()
-    
+
 
 print('Welcome lets play Battleships!')
 main()
