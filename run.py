@@ -137,7 +137,14 @@ def play_battleship():
         computer_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
         i += 1
     
-    return player_ships, computer_ships
+    return player_ships, computer_ships, player_move, computer_move
+
+
+def score_checker(player, computer):
+    """Function takes the player and computer ship lists and counts the list and while the both have greater than 0 ships left the game continues""" 
+    while len(player) > 0 and len(computer) > 0:
+        print(f"Player has {player} ships left\n")
+        print(f"Computer has {computer} ships left")
 
     
 def hit(data, board_data):
@@ -176,7 +183,9 @@ def main():
     """
     user = login_choice()
     print(user)
-    play_battleship()
+    ship_location = play_battleship()
+    score_checker(ship_location[0], ship_location[1])
+
 
 
 print('Welcome lets play Battleships!')
