@@ -151,14 +151,47 @@ def score_checker(player, computer, players_move, computer_move):
 
 def coordinates_entered(player_ships, computer_ships, players_move, computer_move):
     """Takes players and computers previous moves and ships and gets the players input move and the computers move for each turn""" 
-    move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
+    j = 'True'
+    while j == 'True':
+        move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
-    player_move_checker(move, players_move)
+        j = move_checker(move, players_move, j)
+
+    print(f"players moves: {players_move}")
+
 
     if move in computer_ships:
         computer_ships.remove(move)
         hit(move, board_layout)
 
+
+def move_checker(move, players_moves, j):
+    """Checks the players input moves for input being a number and within the range of the board and have only entered 2 coordinates"""
+
+    r = range(1,5)
+
+    moves = move.split( ',')
+    if moves[0].isnumeric() == 'false':
+        print(f"x coordinate is not a number you have entered: {moves[0]}\n")
+    elif moves[1].isnumeric() == 'false':
+        print(f"y coordinate is not a number you have entered: {moves[1]}\n")
+    elif int(moves[0]) not in r:
+        print(f"x coordinate is not a number on the board, you have entered: {moves[0]}\n")
+    elif int(moves[1]) not in r:
+        print(f"y coordinate is not a number on the board, you have entered: {moves[1]}\n")
+    elif move in players_moves:
+        print(f"You have already fired apon these coordinates: {moves}")
+    elif len(moves) != 2:
+        print(f"Too many coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
+    else:
+        players_moves.append(move)
+        return 'False'
+
+    return 'True'
+
+
+
+    
 
 def hit(data, board_data):
     """ Take the users input and edit the board data to chnage a - to H """
