@@ -143,13 +143,14 @@ def play_battleship():
 def score_checker(player, computer, players_move, computer_move):
     """Function takes the player and computer ship lists and counts the list and while the both have greater than 0 ships left the game continues""" 
     while len(player) > 0 and len(computer) > 0:
-        print(f"Player has {player} ships left\n")
-        print(f"Computer has {computer} ships left")
+        print(f"Player has {len(player)} ships left")
+        print(f"Computer has {len(computer)} ships left\n")
 
         coordinates_entered(player, computer, players_move, computer_move)
 
 
 def coordinates_entered(player_ships, computer_ships, players_move, computer_move):
+    """Takes players and computers previous moves and ships and gets the players input move and the computers move for each turn""" 
     move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
     player_move_checker(move, players_move)
@@ -196,7 +197,7 @@ def main():
     user = login_choice()
     print(user)
     ship_location = play_battleship()
-    score_checker(ship_location[0], ship_location[1], ship_location[3], ship_location[4])
+    score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3])
 
 
 
