@@ -159,6 +159,13 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
 
     print(f"players moves: {players_move}")
 
+    t = 'True'
+
+    while t == 'True':
+        com_move = str(random.randint(1,5)) + ',' + str(random.randint(1,5))
+
+        if com_move not in computer_move:
+            t = 'False'
 
     if move in computer_ships:
         computer_ships.remove(move)
@@ -168,7 +175,7 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
 def move_checker(move, players_moves, j):
     """Checks the players input moves for input being a number and within the range of the board and have only entered 2 coordinates"""
 
-    r = range(1,5)
+    r = range(1,6)
 
     moves = move.split( ',')
     if moves[0].isnumeric() == 'false':
