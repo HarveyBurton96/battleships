@@ -84,6 +84,7 @@ def create_login():
     print('Thank you for creating an account')
 
     login = SHEET.worksheet('login')
+    score = SHEET.worksheet('score')
 
     username_data = login.col_values(1)
 
@@ -99,8 +100,10 @@ def create_login():
     password = input('Please enter your password here:\n')
 
     new_user = [username, password]
+    new_user_score = [username, 0, 0, 0]
 
     login.append_row(new_user)
+    score.append_row(new_user_score)
 
     return username
 
@@ -282,6 +285,16 @@ def player_move():
     print('To quit [Q]')
     move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
+def results(result):
+    if result == 'W':
+        print('win')
+    elif result == 'L':
+        print('lose')
+    elif result == 'D':
+        print('draw')
+    elif result == 'Q':
+        print('quit')
+
 
 def main():
     """
@@ -290,7 +303,7 @@ def main():
     user = login_choice()
     ship_location = play_battleship(user)
     result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
-    print(result)
+    results(result)
 
 
 
