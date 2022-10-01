@@ -104,7 +104,7 @@ def create_login():
 
     return username
 
-def play_battleship():
+def play_battleship(user):
     """Create new game and resets the board"""
     print('Lets play battleships!\n')
 
@@ -118,6 +118,9 @@ def play_battleship():
 
     player_board_layout = [player_xcolumn, player_board1, player_board2, player_board3, player_board4, player_board5, player_xcolumn2]
 
+    print('--------------------------------------')
+    print("Computer's ships locations\n")
+
     print(*player_board5, sep = ' ')
     print(*player_board4, sep = ' ')
     print(*player_board3, sep = ' ')
@@ -125,6 +128,9 @@ def play_battleship():
     print(*player_board1, sep = ' ')
     print(*player_xcolumn, sep = ' ')
     print(*player_xcolumn2, sep = ' ')
+
+    print(' ')
+    print('--------------------------------------')
 
     computer_board5 = ['  5', '-', '-', '-', '-', '-']
     computer_board4 = ['  4', '-', '-', '-', '-', '-']
@@ -136,6 +142,9 @@ def play_battleship():
 
     computer_board_layout = [computer_xcolumn, computer_board1, computer_board2, computer_board3, computer_board4, computer_board5, computer_xcolumn2]
 
+    print('--------------------------------------')
+    print(f"{user}'s ships locations\n")
+
     print(*computer_board5, sep = ' ')
     print(*computer_board4, sep = ' ')
     print(*computer_board3, sep = ' ')
@@ -143,6 +152,9 @@ def play_battleship():
     print(*computer_board1, sep = ' ')
     print(*computer_xcolumn, sep = ' ')
     print(*computer_xcolumn2, sep = ' ')
+
+    print(' ')
+    print('--------------------------------------')
 
     computer_ships = []
     player_ships = []
@@ -158,16 +170,17 @@ def play_battleship():
     return player_ships, computer_ships, player_move, computer_move, player_board_layout, computer_board_layout
 
 
-def score_checker(player, computer, players_move, computer_move, player_board_layout, computer_board_layout):
+def score_checker(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user):
     """Function takes the player and computer ship lists and counts the list and while the both have greater than 0 ships left the game continues""" 
     while len(player) > 0 and len(computer) > 0:
-        print(f"Player has {len(player)} ships left")
+        print(' ')
+        print(f"{user} has {len(player)} ships left")
         print(f"Computer has {len(computer)} ships left\n")
 
-        coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout)
+        coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user)
 
 
-def coordinates_entered(player_ships, computer_ships, players_move, computer_move, player_board_layout, computer_board_layout):
+def coordinates_entered(player_ships, computer_ships, players_move, computer_move, player_board_layout, computer_board_layout, user):
     """Takes players and computers previous moves and ships and gets the players input move and the computers move for each turn""" 
     j = 'True'
     while j == 'True':
@@ -175,14 +188,13 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
 
         j = move_checker(move, players_move, j)
 
-    print(f"players moves: {players_move}")
-
     com_move = computer_move.pop(random.randrange(len(computer_move)))
-    print(com_move)
 
-    hit_or_miss(move, computer_ships, player_board_layout)
+    computer = 'Computer'
 
-    hit_or_miss(com_move, player_ships, computer_board_layout)
+    hit_or_miss(move, computer_ships, player_board_layout, user, computer)
+
+    hit_or_miss(com_move, player_ships, computer_board_layout, computer, user)
 
 
 def move_checker(move, players_moves, j):
@@ -213,31 +225,32 @@ def move_checker(move, players_moves, j):
     return 'True'
 
 
-def hit_or_miss(move, enemy_ships, board_layout):
+def hit_or_miss(move, enemy_ships, board_layout, name, oppositons_name):
     """Takes the move and checks if its the same as a ships coordinates if so will send a H if not O """
     if move in enemy_ships:
         hit = 'H'
         enemy_ships.remove(move)
-        outcome(move, board_layout, hit)
+        outcome(move, board_layout, hit, name, oppositons_name)
     else:
         missed = 'O'
-        outcome(move, board_layout, missed)
+        outcome(move, board_layout, missed, name, oppositons_name)
 
 
-def outcome(data, board_data, HM):
+def outcome(data, board_data, HM, name, oppositons_name):
     """ Take the users input and edit the board data to chnage a - to H """
     xandy = data.split(',')
-    print(xandy)
     x = int(xandy[0])
     y = int(xandy[1])
 
-    print(x)
-    print(y)
-
     if HM == 'H':
         board_data[y][x] = 'H'
+        HorM = 'Hit!'
     else:
         board_data[y][x] = 'O'
+        HorM = 'Miss'
+
+    print('--------------------------------------')
+    print(F"{oppositons_name}'s ships locations\n")
 
     print(*board_data[5], sep = ' ')
     print(*board_data[4], sep = ' ')
@@ -246,6 +259,10 @@ def outcome(data, board_data, HM):
     print(*board_data[1], sep = ' ')
     print(*board_data[0], sep = ' ')
     print(*board_data[6], sep = ' ')
+
+    print(' ')
+    print(f"{name} has fired upon: {data} its a {HorM}")
+    print('--------------------------------------')
 
 
 def player_move():
@@ -260,9 +277,8 @@ def main():
     Runs all functions
     """
     user = login_choice()
-    print(user)
-    ship_location = play_battleship()
-    score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5])
+    ship_location = play_battleship(user)
+    score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
 
 
 
