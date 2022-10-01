@@ -285,15 +285,26 @@ def player_move():
     print('To quit [Q]')
     move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
-def results(result):
+def results(result, user):
+    """Takes the result from the previous game and if the player has an account will display there total win/lose/draw scores"""
+    score = SHEET.worksheet('score')
+
     if result == 'W':
-        print('win')
+        print(f"Congratulations {user} you won!")
     elif result == 'L':
-        print('lose')
+        print(f"Better luck next time {user} you lost :(")
     elif result == 'D':
-        print('draw')
-    elif result == 'Q':
-        print('quit')
+        print(f"So close {user} you drew!")
+
+    if user != 'Guess' and result != 'Q':
+    
+        username_place = score.col_values(1).index(user)
+
+        win = score.col_values(2)[username_place]
+        lose = score.col_values(3)[username_place]
+        draw = score.col_values(4)[username_place]
+
+        print(f"\nwins: {win}\nLoses: {lose}\nDraws: {draw}")
 
 
 def main():
@@ -303,7 +314,8 @@ def main():
     user = login_choice()
     ship_location = play_battleship(user)
     result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
-    results(result)
+    #result = 'W'
+    results(result, user)
 
 
 
