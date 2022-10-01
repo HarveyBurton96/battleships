@@ -108,48 +108,66 @@ def play_battleship():
     """Create new game and resets the board"""
     print('Lets play battleships!\n')
 
-    board5 = ['  5', '-', '-', '-', '-', '-']
-    board4 = ['  4', '-', '-', '-', '-', '-']
-    board3 = ['y 3','-', '-', '-', '-', '-']
-    board2 = ['  2','-', '-', '-', '-', '-']
-    board1 = ['  1','-', '-', '-', '-', '-']
-    xcolumn = ['   ', '1', '2', '3', '4', '5']
-    xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
+    player_board5 = ['  5', '-', '-', '-', '-', '-']
+    player_board4 = ['  4', '-', '-', '-', '-', '-']
+    player_board3 = ['y 3','-', '-', '-', '-', '-']
+    player_board2 = ['  2','-', '-', '-', '-', '-']
+    player_board1 = ['  1','-', '-', '-', '-', '-']
+    player_xcolumn = ['   ', '1', '2', '3', '4', '5']
+    player_xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
 
-    board_layout = [xcolumn, board1, board2, board3, board4, board5, xcolumn2]
+    player_board_layout = [player_xcolumn, player_board1, player_board2, player_board3, player_board4, player_board5, player_xcolumn2]
 
-    print(*board5, sep = ' ')
-    print(*board4, sep = ' ')
-    print(*board3, sep = ' ')
-    print(*board2, sep = ' ')
-    print(*board1, sep = ' ')
-    print(*xcolumn, sep = ' ')
-    print(*xcolumn2, sep = ' ')
+    print(*player_board5, sep = ' ')
+    print(*player_board4, sep = ' ')
+    print(*player_board3, sep = ' ')
+    print(*player_board2, sep = ' ')
+    print(*player_board1, sep = ' ')
+    print(*player_xcolumn, sep = ' ')
+    print(*player_xcolumn2, sep = ' ')
+
+    computer_board5 = ['  5', '-', '-', '-', '-', '-']
+    computer_board4 = ['  4', '-', '-', '-', '-', '-']
+    computer_board3 = ['y 3','-', '-', '-', '-', '-']
+    computer_board2 = ['  2','-', '-', '-', '-', '-']
+    computer_board1 = ['  1','-', '-', '-', '-', '-']
+    computer_xcolumn = ['   ', '1', '2', '3', '4', '5']
+    computer_xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
+
+    computer_board_layout = [computer_xcolumn, computer_board1, computer_board2, computer_board3, computer_board4, computer_board5, computer_xcolumn2]
+
+    print(*computer_board5, sep = ' ')
+    print(*computer_board4, sep = ' ')
+    print(*computer_board3, sep = ' ')
+    print(*computer_board2, sep = ' ')
+    print(*computer_board1, sep = ' ')
+    print(*computer_xcolumn, sep = ' ')
+    print(*computer_xcolumn2, sep = ' ')
 
     computer_ships = []
     player_ships = []
     player_move = []
-    computer_move = []
+    computer_move = ['1,5', '3,4', '1,1', '2,3', '1,4', '5,1', '3,3', '5,5', '3,1', '2,2', '4,3', '3,5', '4,1', '4,4', '5,3', '2,1', '4,5', '4,2', '2,4', '3,2', '1,2', '5,4', '2,5', '1,3', '5,2']
 
     i = 0
-    while i < 6:
+    while i < 5:
         player_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
         computer_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
         i += 1
     
-    return player_ships, computer_ships, player_move, computer_move, board_layout
+    return player_ships, computer_ships, player_move, computer_move, player_board_layout, computer_board_layout
 
 
-def score_checker(player, computer, players_move, computer_move, board_layout):
+def score_checker(player, computer, players_move, computer_move, player_board_layout, computer_board_layout):
     """Function takes the player and computer ship lists and counts the list and while the both have greater than 0 ships left the game continues""" 
     while len(player) > 0 and len(computer) > 0:
         print(f"Player has {len(player)} ships left")
         print(f"Computer has {len(computer)} ships left\n")
 
-        coordinates_entered(player, computer, players_move, computer_move, board_layout)
+        coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout)
 
 
-def coordinates_entered(player_ships, computer_ships, players_move, computer_move, board_layout):
+def coordinates_entered(player_ships, computer_ships, players_move, computer_move, player_board_layout, computer_board_layout):
     """Takes players and computers previous moves and ships and gets the players input move and the computers move for each turn""" 
     j = 'True'
     while j == 'True':
@@ -159,17 +177,12 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
 
     print(f"players moves: {players_move}")
 
-    t = 'True'
+    com_move = computer_move.pop(random.randrange(len(computer_move)))
+    print(com_move)
 
-    while t == 'True':
-        com_move = str(random.randint(1,5)) + ',' + str(random.randint(1,5))
+    hit_or_miss(move, computer_ships, player_board_layout)
 
-        if com_move not in computer_move:
-            t = 'False'
-
-    hit_or_miss(move, computer_ships, board_layout)
-
-    hit_or_miss(com_move, player_ships, board_layout)
+    hit_or_miss(com_move, player_ships, computer_board_layout)
 
 
 def move_checker(move, players_moves, j):
@@ -230,8 +243,6 @@ def outcome(data, board_data, HM):
     print(*board_data[0], sep = ' ')
     print(*board_data[6], sep = ' ')
 
-    print(board_data[y][x])
-
 
 def player_move():
     """takes the user moves and assignes it a hit or miss """
@@ -247,7 +258,7 @@ def main():
     user = login_choice()
     print(user)
     ship_location = play_battleship()
-    score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4])
+    score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5])
 
 
 
