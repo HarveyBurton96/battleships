@@ -167,6 +167,10 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
         if com_move not in computer_move:
             t = 'False'
 
+    hit_or_miss(move, computer_ships)
+
+    hit_or_miss(com_move, player_ships)
+
     if move in computer_ships:
         computer_ships.remove(move)
         hit(move, board_layout)
@@ -197,6 +201,12 @@ def move_checker(move, players_moves, j):
     return 'True'
 
 
+def hit_or_miss(move, enemy_ships):
+    if move in enemy_ships:
+        enemy_ships.remove(move)
+        hit(move, board_layout)
+    else:
+        miss(move, board_layout)
 
     
 
