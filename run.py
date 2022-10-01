@@ -189,28 +189,32 @@ def move_checker(move, players_moves, j):
     """Checks the players input moves for input being a number and within the range of the board and have only entered 2 coordinates"""
 
     r = range(1,6)
-
     moves = move.split( ',')
-    if moves[0].isnumeric() == 'false':
-        print(f"x coordinate is not a number you have entered: {moves[0]}\n")
-    elif moves[1].isnumeric() == 'false':
-        print(f"y coordinate is not a number you have entered: {moves[1]}\n")
-    elif int(moves[0]) not in r:
-        print(f"x coordinate is not a number on the board, you have entered: {moves[0]}\n")
-    elif int(moves[1]) not in r:
-        print(f"y coordinate is not a number on the board, you have entered: {moves[1]}\n")
-    elif move in players_moves:
-        print(f"You have already fired apon these coordinates: {moves}")
-    elif len(moves) != 2:
-        print(f"Too many coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
-    else:
-        players_moves.append(move)
-        return 'False'
+
+    try:
+        if len(moves) != 2:
+            print(f"Too many coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
+        elif moves[0].isnumeric() == 'false':
+            print(f"x coordinate is not a number you have entered: {moves[0]}\n")
+        elif moves[1].isnumeric() == 'false':
+            print(f"y coordinate is not a number you have entered: {moves[1]}\n")
+        elif int(moves[0]) not in r:
+            print(f"x coordinate is not a number on the board, you have entered: {moves[0]}\n")
+        elif int(moves[1]) not in r:
+            print(f"y coordinate is not a number on the board, you have entered: {moves[1]}\n")
+        elif move in players_moves:
+            print(f"You have already fired apon these coordinates: {moves}")
+        else:
+            players_moves.append(move)
+            return 'False'
+    except ValueError:
+        print(f"Please check as your input was not a valid coordinates, you entered: {moves}")
 
     return 'True'
 
 
 def hit_or_miss(move, enemy_ships, board_layout):
+    """Takes the move and checks if its the same as a ships coordinates if so will send a H if not O """
     if move in enemy_ships:
         hit = 'H'
         enemy_ships.remove(move)
