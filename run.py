@@ -178,6 +178,13 @@ def score_checker(player, computer, players_move, computer_move, player_board_la
         print(f"Computer has {len(computer)} ships left\n")
 
         coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user)
+    
+    if len(player) == 0 and len(computer) != 0:
+        return 'W'
+    elif len(computer) == 0 and len(player) != 0:
+        return 'L'
+    elif len(player) == 0 and len(computer) == 0:
+        return 'D'
 
 
 def coordinates_entered(player_ships, computer_ships, players_move, computer_move, player_board_layout, computer_board_layout, user):
@@ -278,7 +285,8 @@ def main():
     """
     user = login_choice()
     ship_location = play_battleship(user)
-    score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
+    result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
+    print(result)
 
 
 
