@@ -286,25 +286,40 @@ def player_move():
     move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
 def results(result, user):
-    """Takes the result from the previous game and if the player has an account will display there total win/lose/draw scores"""
+    """Takes the result from the previous game and if the player has an account will display there total win/lose/draw"""
     score = SHEET.worksheet('score')
 
-    if result == 'W':
-        print(f"Congratulations {user} you won!")
-    elif result == 'L':
-        print(f"Better luck next time {user} you lost :(")
-    elif result == 'D':
-        print(f"So close {user} you drew!")
-
-    if user != 'Guess' and result != 'Q':
-    
+    if user != 'Guess':
         username_place = score.col_values(1).index(user)
-
         win = score.col_values(2)[username_place]
         lose = score.col_values(3)[username_place]
         draw = score.col_values(4)[username_place]
 
+    if result == 'W':
+        print(f"Congratulations {user} you won!")
+        if user != 'Guess':
+            win = int(win) + 1
+    elif result == 'L':
+        print(f"Better luck next time {user} you lost :(")
+        if user != 'Guess':
+            lose = int(lose) + 1
+    elif result == 'D':
+        print(f"So close {user} you drew!")
+        if user != 'Guess':
+            draw = int(draw) + 1
+
+    if user != 'Guess' and result != 'Q':
         print(f"\nwins: {win}\nLoses: {lose}\nDraws: {draw}")
+
+        print(username_place)
+
+        score.update('B' + str(username_place+1), win)
+        score.update('C' + str(username_place+1), lose)
+        score.update('D' + str(username_place+1), draw)
+
+
+
+        
 
 
 def main():
@@ -314,7 +329,6 @@ def main():
     user = login_choice()
     ship_location = play_battleship(user)
     result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
-    #result = 'W'
     results(result, user)
 
 
