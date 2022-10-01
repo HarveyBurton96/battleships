@@ -177,7 +177,8 @@ def score_checker(player, computer, players_move, computer_move, player_board_la
         print(f"{user} has {len(player)} ships left")
         print(f"Computer has {len(computer)} ships left\n")
 
-        coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user)
+        if coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user) == 'Q':
+            return 'Q'
     
     if len(player) == 0 and len(computer) != 0:
         return 'W'
@@ -191,7 +192,10 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
     """Takes players and computers previous moves and ships and gets the players input move and the computers move for each turn""" 
     j = 'True'
     while j == 'True':
-        move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
+        move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\nIf you would like to quit the game please enter [Q].\n")
+
+        if move == 'Q':
+            return 'Q'
 
         j = move_checker(move, players_move, j)
 
