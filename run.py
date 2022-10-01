@@ -317,7 +317,19 @@ def results(result, user):
         score.update('C' + str(username_place+1), lose)
         score.update('D' + str(username_place+1), draw)
 
+def still_playing(user):
 
+    t = 0
+
+    while t == 0:
+        decision = input(f"Would you like to play another game? \nEnter [P] to play another\nEnter [Q] to quite to the game\n")
+        
+        if decision == 'P':
+            return True
+        elif decision == 'Q':
+            return False
+        else:
+            print(f"The input has not been recoginsed you have entered: {decision}, Please try again.\n")
 
         
 
@@ -327,9 +339,12 @@ def main():
     Runs all functions
     """
     user = login_choice()
-    ship_location = play_battleship(user)
-    result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
-    results(result, user)
+    play = True
+    while play == True:
+        ship_location = play_battleship(user)
+        result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
+        results(result, user)
+        play = still_playing(user)
 
 
 
