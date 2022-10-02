@@ -208,14 +208,10 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
         j = move_checker(move, players_move, j)
 
     com_move = computer_move.pop(random.randrange(len(computer_move)))
-
     computer = 'Computer'
 
     hit_or_miss(move, computer_ships, player_board_layout, user, computer)
-    print(computer_ships)
-
     hit_or_miss(com_move, player_ships, computer_board_layout, computer, user)
-    print(player_ships)
 
 
 def move_checker(move, players_moves, j):
@@ -284,13 +280,6 @@ def outcome(data, board_data, HM, name, oppositons_name):
     print(' ')
     print(f"{name} has fired upon: {data} its a {HorM}")
     print('--------------------------------------')
-
-
-def player_move():
-    """takes the user moves and assignes it a hit or miss """
-    print('Make your move')
-    print('To quit [Q]')
-    move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
 
 def results(result, user):
