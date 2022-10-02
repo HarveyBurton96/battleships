@@ -259,10 +259,10 @@ def hit_or_miss(move, enemy_ships, board_layout, name, oppositons_name):
     if move in enemy_ships:
         hit = 'H'
         enemy_ships.remove(move)
-        outcome(move, board_layout, hit, name, oppositons_name)
     else:
-        missed = 'O'
-        outcome(move, board_layout, missed, name, oppositons_name)
+        hit = 'O'
+    outcome(move, board_layout, hit, name, oppositons_name)
+        
 
 
 def outcome(data, board_data, HM, name, oppositons_name):
