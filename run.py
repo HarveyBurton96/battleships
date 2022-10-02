@@ -231,22 +231,22 @@ def move_checker(move, players_input_moves):
 
     try:
         if len(moves) != 2:
-            print(f"Incorrect amount of coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
+            print(f"\nIncorrect amount of coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates\n")
         elif moves[0].isnumeric() == False:
-            print(f"x coordinate is not a number you have entered: {moves[0]}\n")
+            print(f"\nx coordinate is not a number you have entered: {moves[0]}\n")
         elif moves[1].isnumeric() == False:
-            print(f"y coordinate is not a number you have entered: {moves[1]}\n")
+            print(f"\ny coordinate is not a number you have entered: {moves[1]}\n")
         elif int(moves[0]) not in r:
-            print(f"x coordinate is not a number on the board, you have entered: {moves[0]}\n")
+            print(f"\nx coordinate is not a number on the board, you have entered: {moves[0]}\n")
         elif int(moves[1]) not in r:
-            print(f"y coordinate is not a number on the board, you have entered: {moves[1]}\n")
+            print(f"\ny coordinate is not a number on the board, you have entered: {moves[1]}\n")
         elif move in players_input_moves:
-            print(f"You have already fired upon these coordinates: {moves}")
+            print(f"\nYou have already fired upon these coordinates: {moves}\n")
         else:
             players_input_moves.append(move)
             return False
     except ValueError:
-        print(f"Please check as your input was not a valid coordinates, you entered: {moves}")
+        print(f"\nPlease check as your input was not a valid coordinates, you entered: {moves}\n")
 
     return True
 
