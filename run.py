@@ -20,7 +20,7 @@ def login_choice():
     """
     x=0 
     while x == 0:
-        print('Please select a loggin option\n')
+        print('Please select a login option\n')
         print('Login [L]')
         print('Create an account [C]')
         print('Log in as a guess [G]\n')
@@ -45,7 +45,7 @@ def login_choice():
 
 def log_in():
     """
-    For users with an existing account will enter there details here 
+    For users with an existing account will enter their details here 
     """
     x = 0 
 
@@ -69,7 +69,7 @@ def log_in():
         password = input('Please enter your password here:\n')
 
         if password == password_data[username_place]:
-            print(f"welcome back {username}")
+            print(f"Welcome back {username}")
             y += 1
         else:
             print(f"Password: {password}, is not recognised please try again")
@@ -109,7 +109,9 @@ def create_login():
 
 
 def play_battleship(user):
-    """Create new game and resets the board"""
+    """
+    Create new game and resets the board
+    """
     print('Lets play battleships!\n')
 
     player_board5 = ['  5', '-', '-', '-', '-', '-']
@@ -179,18 +181,20 @@ def play_battleship(user):
 
 
 def score_checker(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user):
-    """Function takes the player and computer ship lists and counts the list and while the both have greater than 0 ships left the game continues""" 
+    """
+    Function takes the player and computer ship lists and counts the list, and while both have a length greater than no ships left the game continues. Unless the player has entered Q to quit the game
+    """ 
     while len(player) > 0 and len(computer) > 0:
         print(' ')
         print(f"{user} has {len(player)} ships left")
         print(f"Computer has {len(computer)} ships left\n")
 
         if coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user) == 'Q':
-            print(f"Your remianing ships were located at: {player}\nThe computers remaining ships were located at: {computer}\n")
+            print(f"Your remaining ships were located at: {player}\nThe computers remaining ships were located at: {computer}\n")
             return 'Q'
     
     if len(player) != 0 and len(computer) == 0:
-        print(f"Your remianing ships were located at: {player}\n")
+        print(f"Your remaining ships were located at: {player}\n")
         return 'W'
     elif len(computer) != 0 and len(player) == 0:
         print(f"The computers remaining ships were located at: {computer}\n")
@@ -200,10 +204,12 @@ def score_checker(player, computer, players_move, computer_move, player_board_la
 
 
 def coordinates_entered(player_ships, computer_ships, players_move, computer_move, player_board_layout, computer_board_layout, user):
-    """Takes players and computers previous moves and ships and gets the players input move and the computers move for each turn""" 
+    """
+    Takes players and computers moves for each turn
+    """ 
     j = 'True'
     while j == 'True':
-        move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\nIf you would like to quit the game please enter [Q].\n")
+        move = input("Please enter your move here, with column (x) then row (y) separated by a ',' i.e. x,y:\nIf you would like to quit the game please enter [Q].\n")
 
         if move == 'Q':
             return 'Q'
@@ -218,8 +224,9 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
 
 
 def move_checker(move, players_moves, j):
-    """Checks the players input moves for input being a number and within the range of the board and have only entered 2 coordinates"""
-
+    """
+    Checks the players input moves for input being a number and within the range of the board and have only entered 2 coordinates
+    """
     r = range(1,6)
     moves = move.split( ',')
 
@@ -235,7 +242,7 @@ def move_checker(move, players_moves, j):
         elif int(moves[1]) not in r:
             print(f"y coordinate is not a number on the board, you have entered: {moves[1]}\n")
         elif move in players_moves:
-            print(f"You have already fired apon these coordinates: {moves}")
+            print(f"You have already fired upon these coordinates: {moves}")
         else:
             players_moves.append(move)
             return 'False'
@@ -246,7 +253,9 @@ def move_checker(move, players_moves, j):
 
 
 def hit_or_miss(move, enemy_ships, board_layout, name, oppositons_name):
-    """Takes the move and checks if its the same as a ships coordinates if so will send a H if not O """
+    """
+    Takes the move and checks if it's the same as a enemy ship coordinates if so will send a H if not O
+    """
     if move in enemy_ships:
         hit = 'H'
         enemy_ships.remove(move)
@@ -257,7 +266,9 @@ def hit_or_miss(move, enemy_ships, board_layout, name, oppositons_name):
 
 
 def outcome(data, board_data, HM, name, oppositons_name):
-    """ Take the users input and edit the board data to chnage a - to H """
+    """
+    Take the users input and edit the board data to change a - to H or O depending if it's a hit or miss
+    """
     xandy = data.split(',')
     x = int(xandy[0])
     y = int(xandy[1])
@@ -286,7 +297,9 @@ def outcome(data, board_data, HM, name, oppositons_name):
 
 
 def results(result, user):
-    """Takes the result from the previous game and if the player has an account will display there total win/lose/draw"""
+    """
+    Displays the result of the game and if the player has an account will display their total win/lose/draw
+    """
     score = SHEET.worksheet('score')
 
     if user != 'Guess':
@@ -317,9 +330,10 @@ def results(result, user):
 
 
 def still_playing(user):
-
+    """
+    To determine if the payer would like to play another round of battleships
+    """
     t = 0
-
     while t == 0:
         decision = input(f"Would you like to play another game? \nEnter [P] to play another\nEnter [Q] to quite to the game\n")
         
@@ -329,7 +343,7 @@ def still_playing(user):
             print('Thank you for playing!')
             return False
         else:
-            print(f"The input has not been recoginsed you have entered: {decision}, Please try again.\n")       
+            print(f"The input has not been recognised you have entered: {decision}, Please try again.\n")       
 
 
 def main():
