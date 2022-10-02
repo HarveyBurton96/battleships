@@ -13,6 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('battleships')
 
+
 def login_choice():
     """
     Allows the user to choose the appropriate login for them
@@ -80,7 +81,6 @@ def create_login():
     """
     This function will check if a username is already in use and if not will save the username and password to the spreadsheet
     """
-
     print('Thank you for creating an account')
 
     login = SHEET.worksheet('login')
@@ -106,6 +106,7 @@ def create_login():
     score.append_row(new_user_score)
 
     return username
+
 
 def play_battleship(user):
     """Create new game and resets the board"""
@@ -164,11 +165,15 @@ def play_battleship(user):
     player_move = []
     computer_move = ['1,5', '3,4', '1,1', '2,3', '1,4', '5,1', '3,3', '5,5', '3,1', '2,2', '4,3', '3,5', '4,1', '4,4', '5,3', '2,1', '4,5', '4,2', '2,4', '3,2', '1,2', '5,4', '2,5', '1,3', '5,2']
 
-    i = 0
-    while i < 5:
-        player_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
-        computer_ships.append(str(random.randint(1,5)) + ',' + str(random.randint(1,5)))
-        i += 1
+    while len(player_ships) < 5:
+        num1 = str(random.randint(1,5)) + ',' + str(random.randint(1,5))
+        if num1 not in player_ships:
+            player_ships.append(num1)
+
+    while len(computer_ships) < 5:
+        num2 = str(random.randint(1,5)) + ',' + str(random.randint(1,5))
+        if num2 not in computer_ships:
+            computer_ships.append(num2)
     
     return player_ships, computer_ships, player_move, computer_move, player_board_layout, computer_board_layout
 
@@ -183,9 +188,9 @@ def score_checker(player, computer, players_move, computer_move, player_board_la
         if coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user) == 'Q':
             return 'Q'
     
-    if len(player) == 0 and len(computer) != 0:
+    if len(player) != 0 and len(computer) == 0:
         return 'W'
-    elif len(computer) == 0 and len(player) != 0:
+    elif len(computer) != 0 and len(player) == 0:
         return 'L'
     elif len(player) == 0 and len(computer) == 0:
         return 'D'
@@ -207,8 +212,10 @@ def coordinates_entered(player_ships, computer_ships, players_move, computer_mov
     computer = 'Computer'
 
     hit_or_miss(move, computer_ships, player_board_layout, user, computer)
+    print(computer_ships)
 
     hit_or_miss(com_move, player_ships, computer_board_layout, computer, user)
+    print(player_ships)
 
 
 def move_checker(move, players_moves, j):
@@ -285,6 +292,7 @@ def player_move():
     print('To quit [Q]')
     move = input("Please enter your move here, with column (x) then row (y) seperated by a ',' (x,y):\n")
 
+
 def results(result, user):
     """Takes the result from the previous game and if the player has an account will display there total win/lose/draw"""
     score = SHEET.worksheet('score')
@@ -317,6 +325,7 @@ def results(result, user):
         score.update('C' + str(username_place+1), lose)
         score.update('D' + str(username_place+1), draw)
 
+
 def still_playing(user):
 
     t = 0
@@ -327,11 +336,10 @@ def still_playing(user):
         if decision == 'P':
             return True
         elif decision == 'Q':
+            print('Thank you for playing!')
             return False
         else:
-            print(f"The input has not been recoginsed you have entered: {decision}, Please try again.\n")
-
-        
+            print(f"The input has not been recoginsed you have entered: {decision}, Please try again.\n")       
 
 
 def main():
@@ -345,7 +353,6 @@ def main():
         result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
         results(result, user)
         play = still_playing(user)
-
 
 
 print('Welcome lets play Battleships!')
