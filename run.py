@@ -18,8 +18,8 @@ def login_choice():
     """
     Allows the user to choose the appropriate login for them
     """
-    x=0 
-    while x == 0:
+    valid_login = False 
+    while valid_login == False:
         print('Please select a login option\n')
         print('Login [L]')
         print('Create an account [C]')
@@ -29,18 +29,26 @@ def login_choice():
 
         if option == 'L':
             user = log_in()
-            x += 1
-
+            valid_login = True
+        elif option == 'l':
+            user = log_in()
+            valid_login = True
         elif option == 'C':
             user = create_login()
-            x += 1
+            valid_login = True
+        elif option == 'c':
+            user = create_login()
+            valid_login = True
         elif option == 'G':
-            x += 1
+            valid_login = True
+            user = 'Guess'
+        elif option == 'g':
+            valid_login = True
             user = 'Guess'
         else:
             print(f"Please check as the input you have supplied is not a valid option you have enter: {option}, please try again.\n")
 
-        return user
+    return user
 
 
 def log_in():
@@ -79,7 +87,7 @@ def log_in():
 
 def create_login():
     """
-    This function will check if a username is already in use and if not will save the username and password to the spreadsheet
+    This function will check if a username is already in use and if not will save the username and password to the spreadsheet as well as adding thier scores
     """
     print('Thank you for creating an account')
 
@@ -114,116 +122,118 @@ def play_battleship(user):
     """
     print('Lets play battleships!\n')
 
-    player_board5 = ['  5', '-', '-', '-', '-', '-']
-    player_board4 = ['  4', '-', '-', '-', '-', '-']
-    player_board3 = ['y 3','-', '-', '-', '-', '-']
-    player_board2 = ['  2','-', '-', '-', '-', '-']
-    player_board1 = ['  1','-', '-', '-', '-', '-']
-    player_xcolumn = ['   ', '1', '2', '3', '4', '5']
-    player_xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
+    player_row5 = ['  5', '-', '-', '-', '-', '-']
+    player_row4 = ['  4', '-', '-', '-', '-', '-']
+    player_row3 = ['y 3','-', '-', '-', '-', '-']
+    player_row2 = ['  2','-', '-', '-', '-', '-']
+    player_row1 = ['  1','-', '-', '-', '-', '-']
+    player_xcolumn_numbers = ['   ', '1', '2', '3', '4', '5']
+    player_xcolumn = ['   ', ' ', ' ', 'x', ' ', ' ']
 
-    player_board_layout = [player_xcolumn, player_board1, player_board2, player_board3, player_board4, player_board5, player_xcolumn2]
+    player_board = [player_xcolumn_numbers, player_row1, player_row2, player_row3, player_row4, player_row5, player_xcolumn]
 
     print('--------------------------------------')
     print("Computer's ships locations\n")
 
-    print(*player_board5, sep = ' ')
-    print(*player_board4, sep = ' ')
-    print(*player_board3, sep = ' ')
-    print(*player_board2, sep = ' ')
-    print(*player_board1, sep = ' ')
+    print(*player_row5, sep = ' ')
+    print(*player_row4, sep = ' ')
+    print(*player_row3, sep = ' ')
+    print(*player_row2, sep = ' ')
+    print(*player_row1, sep = ' ')
+    print(*player_xcolumn_numbers, sep = ' ')
     print(*player_xcolumn, sep = ' ')
-    print(*player_xcolumn2, sep = ' ')
 
     print(' ')
     print('--------------------------------------')
 
-    computer_board5 = ['  5', '-', '-', '-', '-', '-']
-    computer_board4 = ['  4', '-', '-', '-', '-', '-']
-    computer_board3 = ['y 3','-', '-', '-', '-', '-']
-    computer_board2 = ['  2','-', '-', '-', '-', '-']
-    computer_board1 = ['  1','-', '-', '-', '-', '-']
-    computer_xcolumn = ['   ', '1', '2', '3', '4', '5']
-    computer_xcolumn2 = ['   ', ' ', ' ', 'x', ' ', ' ']
+    computer_row5 = ['  5', '-', '-', '-', '-', '-']
+    computer_row4 = ['  4', '-', '-', '-', '-', '-']
+    computer_row3 = ['y 3','-', '-', '-', '-', '-']
+    computer_row2 = ['  2','-', '-', '-', '-', '-']
+    computer_row1 = ['  1','-', '-', '-', '-', '-']
+    computer_xcolumn_numbers = ['   ', '1', '2', '3', '4', '5']
+    computer_xcolumn = ['   ', ' ', ' ', 'x', ' ', ' ']
 
-    computer_board_layout = [computer_xcolumn, computer_board1, computer_board2, computer_board3, computer_board4, computer_board5, computer_xcolumn2]
+    computer_board = [computer_xcolumn_numbers, computer_row1, computer_row2, computer_row3, computer_row4, computer_row5, computer_xcolumn]
 
     print('--------------------------------------')
     print(f"{user}'s ships locations\n")
 
-    print(*computer_board5, sep = ' ')
-    print(*computer_board4, sep = ' ')
-    print(*computer_board3, sep = ' ')
-    print(*computer_board2, sep = ' ')
-    print(*computer_board1, sep = ' ')
+    print(*computer_row5, sep = ' ')
+    print(*computer_row4, sep = ' ')
+    print(*computer_row3, sep = ' ')
+    print(*computer_row2, sep = ' ')
+    print(*computer_row1, sep = ' ')
+    print(*computer_xcolumn_numbers, sep = ' ')
     print(*computer_xcolumn, sep = ' ')
-    print(*computer_xcolumn2, sep = ' ')
 
     print(' ')
     print('--------------------------------------')
 
-    computer_ships = []
-    player_ships = []
-    player_move = []
-    computer_move = ['1,5', '3,4', '1,1', '2,3', '1,4', '5,1', '3,3', '5,5', '3,1', '2,2', '4,3', '3,5', '4,1', '4,4', '5,3', '2,1', '4,5', '4,2', '2,4', '3,2', '1,2', '5,4', '2,5', '1,3', '5,2']
+    computer_ships_locations = []
+    player_ships_locations = []
+    players_input_moves = []
+    computer_potential_moves = ['1,5', '3,4', '1,1', '2,3', '1,4', '5,1', '3,3', '5,5', '3,1', '2,2', '4,3', '3,5', '4,1', '4,4', '5,3', '2,1', '4,5', '4,2', '2,4', '3,2', '1,2', '5,4', '2,5', '1,3', '5,2']
 
-    while len(player_ships) < 5:
+    while len(player_ships_locations) < 5:
         num1 = str(random.randint(1,5)) + ',' + str(random.randint(1,5))
-        if num1 not in player_ships:
-            player_ships.append(num1)
+        if num1 not in player_ships_locations:
+            player_ships_locations.append(num1)
 
-    while len(computer_ships) < 5:
+    while len(computer_ships_locations) < 5:
         num2 = str(random.randint(1,5)) + ',' + str(random.randint(1,5))
-        if num2 not in computer_ships:
-            computer_ships.append(num2)
+        if num2 not in computer_ships_locations:
+            computer_ships_locations.append(num2)
     
-    return player_ships, computer_ships, player_move, computer_move, player_board_layout, computer_board_layout
+    return player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board
 
 
-def score_checker(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user):
+def score_checker(player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board, user):
     """
     Function takes the player and computer ship lists and counts the list, and while both have a length greater than no ships left the game continues. Unless the player has entered Q to quit the game
     """ 
-    while len(player) > 0 and len(computer) > 0:
+    while len(player_ships_locations) > 0 and len(computer_ships_locations) > 0:
         print(' ')
-        print(f"{user} has {len(player)} ships left")
-        print(f"Computer has {len(computer)} ships left\n")
+        print(f"{user} has {len(player_ships_locations)} ships left")
+        print(f"Computer has {len(computer_ships_locations)} ships left\n")
 
-        if coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user) == 'Q':
-            print(f"Your remaining ships were located at: {player}\nThe computers remaining ships were located at: {computer}\n")
+        if coordinates_entered(player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board, user) == 'Q':
+            print(f"Your remaining ships were located at: {player_ships_locations}\nThe computers remaining ships were located at: {computer_ships_locations}\n")
             return 'Q'
     
-    if len(player) != 0 and len(computer) == 0:
-        print(f"Your remaining ships were located at: {player}\n")
+    if len(player_ships_locations) != 0 and len(computer_ships_locations) == 0:
+        print(f"Your remaining ships were located at: {player_ships_locations}\n")
         return 'W'
-    elif len(computer) != 0 and len(player) == 0:
-        print(f"The computers remaining ships were located at: {computer}\n")
+    elif len(computer_ships_locations) != 0 and len(player_ships_locations) == 0:
+        print(f"The computers remaining ships were located at: {computer_ships_locations}\n")
         return 'L'
-    elif len(player) == 0 and len(computer) == 0:
+    elif len(player_ships_locations) == 0 and len(computer_ships_locations) == 0:
         return 'D'
 
 
-def coordinates_entered(player_ships, computer_ships, players_move, computer_move, player_board_layout, computer_board_layout, user):
+def coordinates_entered(player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board, user):
     """
     Takes players and computers moves for each turn
     """ 
-    j = 'True'
-    while j == 'True':
+    coordinates_not_valid = True
+    while coordinates_not_valid == True:
         move = input("Please enter your move here, with column (x) then row (y) separated by a ',' i.e. x,y:\nIf you would like to quit the game please enter [Q].\n")
 
         if move == 'Q':
             return 'Q'
+        elif move == 'q':
+            return 'Q'
 
-        j = move_checker(move, players_move, j)
+        coordinates_not_valid = move_checker(move, players_input_moves)
 
-    com_move = computer_move.pop(random.randrange(len(computer_move)))
+    com_move = computer_potential_moves.pop(random.randrange(len(computer_potential_moves)))
     computer = 'Computer'
 
-    hit_or_miss(move, computer_ships, player_board_layout, user, computer)
-    hit_or_miss(com_move, player_ships, computer_board_layout, computer, user)
+    hit_or_miss(move, computer_ships_locations, player_board, user, computer)
+    hit_or_miss(com_move, player_ships_locations, computer_board, computer, user)
 
 
-def move_checker(move, players_moves, j):
+def move_checker(move, players_input_moves):
     """
     Checks the players input moves for input being a number and within the range of the board and have only entered 2 coordinates
     """
@@ -233,66 +243,66 @@ def move_checker(move, players_moves, j):
     try:
         if len(moves) != 2:
             print(f"Incorrect amount of coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
-        elif moves[0].isnumeric() == 'false':
+        elif moves[0].isnumeric() == False:
             print(f"x coordinate is not a number you have entered: {moves[0]}\n")
-        elif moves[1].isnumeric() == 'false':
+        elif moves[1].isnumeric() == False:
             print(f"y coordinate is not a number you have entered: {moves[1]}\n")
         elif int(moves[0]) not in r:
             print(f"x coordinate is not a number on the board, you have entered: {moves[0]}\n")
         elif int(moves[1]) not in r:
             print(f"y coordinate is not a number on the board, you have entered: {moves[1]}\n")
-        elif move in players_moves:
+        elif move in players_input_moves:
             print(f"You have already fired upon these coordinates: {moves}")
         else:
-            players_moves.append(move)
-            return 'False'
+            players_input_moves.append(move)
+            return False
     except ValueError:
         print(f"Please check as your input was not a valid coordinates, you entered: {moves}")
 
-    return 'True'
+    return True
 
 
-def hit_or_miss(move, enemy_ships, board_layout, name, oppositons_name):
+def hit_or_miss(move, enemy_ships_locations, board_layout, name, oppositons_name):
     """
     Takes the move and checks if it's the same as a enemy ship coordinates if so will send a H if not O
     """
-    if move in enemy_ships:
+    if move in enemy_ships_locations:
         hit = 'H'
-        enemy_ships.remove(move)
+        enemy_ships_locations.remove(move)
     else:
         hit = 'O'
     outcome(move, board_layout, hit, name, oppositons_name)
         
 
 
-def outcome(data, board_data, HM, name, oppositons_name):
+def outcome(move, board_layout, Hit_or_Miss, name, oppositons_name):
     """
     Take the users input and edit the board data to change a - to H or O depending if it's a hit or miss
     """
-    xandy = data.split(',')
+    xandy = move.split(',')
     x = int(xandy[0])
     y = int(xandy[1])
 
-    if HM == 'H':
-        board_data[y][x] = 'H'
-        HorM = 'Hit!'
+    if Hit_or_Miss == 'H':
+        board_layout[y][x] = 'H'
+        move_outcome = 'Hit!'
     else:
-        board_data[y][x] = 'O'
-        HorM = 'Miss'
+        board_layout[y][x] = 'O'
+        move_outcome = 'Miss'
 
     print('--------------------------------------')
     print(F"{oppositons_name}'s ships locations\n")
 
-    print(*board_data[5], sep = ' ')
-    print(*board_data[4], sep = ' ')
-    print(*board_data[3], sep = ' ')
-    print(*board_data[2], sep = ' ')
-    print(*board_data[1], sep = ' ')
-    print(*board_data[0], sep = ' ')
-    print(*board_data[6], sep = ' ')
+    print(*board_layout[5], sep = ' ')
+    print(*board_layout[4], sep = ' ')
+    print(*board_layout[3], sep = ' ')
+    print(*board_layout[2], sep = ' ')
+    print(*board_layout[1], sep = ' ')
+    print(*board_layout[0], sep = ' ')
+    print(*board_layout[6], sep = ' ')
 
     print(' ')
-    print(f"{name} has fired upon: {data} its a {HorM}")
+    print(f"{name} has fired upon: {move} its a {move_outcome}")
     print('--------------------------------------')
 
 
@@ -333,13 +343,18 @@ def still_playing(user):
     """
     To determine if the payer would like to play another round of battleships
     """
-    t = 0
-    while t == 0:
+    playing = True
+    while playing == True:
         decision = input(f"Would you like to play another game? \nEnter [P] to play another\nEnter [Q] to quite to the game\n")
         
         if decision == 'P':
             return True
+        elif decision == 'p':
+            return True
         elif decision == 'Q':
+            print('Thank you for playing!')
+            return False
+        elif decision == 'q':
             print('Thank you for playing!')
             return False
         else:
