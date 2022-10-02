@@ -186,11 +186,14 @@ def score_checker(player, computer, players_move, computer_move, player_board_la
         print(f"Computer has {len(computer)} ships left\n")
 
         if coordinates_entered(player, computer, players_move, computer_move, player_board_layout, computer_board_layout, user) == 'Q':
+            print(f"Your remianing ships were located at: {player}\nThe computers remaining ships were located at: {computer}\n")
             return 'Q'
     
     if len(player) != 0 and len(computer) == 0:
+        print(f"Your remianing ships were located at: {player}\n")
         return 'W'
     elif len(computer) != 0 and len(player) == 0:
+        print(f"The computers remaining ships were located at: {computer}\n")
         return 'L'
     elif len(player) == 0 and len(computer) == 0:
         return 'D'
@@ -222,7 +225,7 @@ def move_checker(move, players_moves, j):
 
     try:
         if len(moves) != 2:
-            print(f"Too many coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
+            print(f"Incorrect amount of coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates")
         elif moves[0].isnumeric() == 'false':
             print(f"x coordinate is not a number you have entered: {moves[0]}\n")
         elif moves[1].isnumeric() == 'false':
@@ -307,8 +310,6 @@ def results(result, user):
 
     if user != 'Guess' and result != 'Q':
         print(f"\nwins: {win}\nLoses: {lose}\nDraws: {draw}")
-
-        print(username_place)
 
         score.update('B' + str(username_place+1), win)
         score.update('C' + str(username_place+1), lose)
