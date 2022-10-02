@@ -27,22 +27,13 @@ def login_choice():
 
         option = input('Please enter your option here:\n')
 
-        if option == 'L':
+        if option == 'L' or option == 'l':
             user = log_in()
             valid_login = True
-        elif option == 'l':
-            user = log_in()
-            valid_login = True
-        elif option == 'C':
+        elif option == 'C' or option == 'c':
             user = create_login()
             valid_login = True
-        elif option == 'c':
-            user = create_login()
-            valid_login = True
-        elif option == 'G':
-            valid_login = True
-            user = 'Guess'
-        elif option == 'g':
+        elif option == 'G' or option == 'g':
             valid_login = True
             user = 'Guess'
         else:
@@ -219,9 +210,7 @@ def coordinates_entered(player_ships_locations, computer_ships_locations, player
     while coordinates_not_valid == True:
         move = input("Please enter your move here, with column (x) then row (y) separated by a ',' i.e. x,y:\nIf you would like to quit the game please enter [Q].\n")
 
-        if move == 'Q':
-            return 'Q'
-        elif move == 'q':
+        if move == 'Q' or move == 'q':
             return 'Q'
 
         coordinates_not_valid = move_checker(move, players_input_moves)
@@ -347,14 +336,9 @@ def still_playing(user):
     while playing == True:
         decision = input(f"Would you like to play another game? \nEnter [P] to play another\nEnter [Q] to quite to the game\n")
         
-        if decision == 'P':
+        if decision == 'P' or decision == 'p':
             return True
-        elif decision == 'p':
-            return True
-        elif decision == 'Q':
-            print('Thank you for playing!')
-            return False
-        elif decision == 'q':
+        elif decision == 'Q' or decision == 'q':
             print('Thank you for playing!')
             return False
         else:
