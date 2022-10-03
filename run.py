@@ -271,7 +271,7 @@ def coordinates_entered(player_ships_locations, computer_ships_locations, player
     """ 
     coordinates_not_valid = True
     while coordinates_not_valid is True:
-        move = input("Please enter your move here, with column (x) then row (y) separated by a ',' i.e. x,y:\n")
+        move = input("Please enter your move here, with column (x) then row (y) \nseparated by a ',' i.e. x,y:\n")
 
         if move == 'Q' or move == 'q':
             return 'Q'
