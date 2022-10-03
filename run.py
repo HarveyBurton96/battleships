@@ -25,6 +25,7 @@ def login_choice():
         print('Login [L]')
         print('Create an account [C]')
         print('Log in as a guess [G]\n')
+        print('If you would like to quit the game at any time please enter [Q].\n')
 
         option = input('Please enter your option here:\n')
 
@@ -37,6 +38,9 @@ def login_choice():
         elif option == 'G' or option == 'g':
             valid_login = True
             user = 'Guess'
+        elif option == 'Q' or option == 'q':
+            print(f"You have entered {option} to quit the game. Hope you come back soon!")
+            return 'Q'
         else:
             print(
                 f"Please check as the input you have supplied is not a valid option you have enter: {option}, please try again.\n"
@@ -267,7 +271,7 @@ def coordinates_entered(player_ships_locations, computer_ships_locations, player
     """ 
     coordinates_not_valid = True
     while coordinates_not_valid is True:
-        move = input("Please enter your move here, with column (x) then row (y) separated by a ',' i.e. x,y:\nIf you would like to quit the game please enter [Q].\n")
+        move = input("Please enter your move here, with column (x) then row (y) separated by a ',' i.e. x,y:\n")
 
         if move == 'Q' or move == 'q':
             return 'Q'
