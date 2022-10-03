@@ -1,5 +1,6 @@
 import gspread
 import random
+import time
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -60,6 +61,9 @@ def log_in():
 
         if username in username_data:
             x += 1
+        elif username == 'q' or username == 'Q':
+            print(f"You have entered {username} to quit the game. Hope you come back soon!")
+            return 'Q'
         else:
             print(f"Username: '{username}', is not recognised please try again\n")
 
@@ -72,6 +76,9 @@ def log_in():
         if password == password_data[username_place]:
             print(f"Welcome back {username}")
             y += 1
+        elif password == 'q' or password == 'Q':
+            print(f"You have entered {password} to quit the game. Hope you come back soon!")
+            return 'Q'
         else:
             print(f"Password: {password}, is not recognised please try again")
 
@@ -85,6 +92,7 @@ def create_login():
     adding thier scores
     """
     print('Thank you for creating an account')
+    time.sleep(1)
 
     login = SHEET.worksheet('login')
     score = SHEET.worksheet('score')
@@ -101,8 +109,29 @@ def create_login():
                 f"Please select another username as '{username}' has already been selected.\n"
                 )
             x -= 1
+        elif username.count(' ') >= 1 or username == '':
+            print(
+                f"Please select another username as '{username}' is not valid.\n"
+                )
+            x -= 1
+        elif username == 'q' or username == 'Q':
+            print(f"You have entered {username} to quit the game. Hope you come back soon!")
+            return 'Q'
+    p = 0
 
-    password = input('Please enter your password here:\n')
+    while p == 0:
+        password = input('Please enter your password here:\n')
+        p += 1
+        
+        if password.count(' ') >= 1 or password == '':
+            print(
+                f"Please select another password as '{password}' is not valid.\n"
+                )
+            x -= 1
+        elif password == 'q' or password == 'Q':
+            print(f"You have entered {password} to quit the game. Hope you come back soon!")
+            return 'Q'
+    
 
     new_user = [username, password]
     new_user_score = [username, 0, 0, 0]
@@ -118,6 +147,7 @@ def play_battleship(user):
     Create new game and resets the board
     """
     print('Lets play battleships!\n')
+    time.sleep(1)
 
     player_row5 = ['  5', '-', '-', '-', '-', '-']
     player_row4 = ['  4', '-', '-', '-', '-', '-']
@@ -145,6 +175,7 @@ def play_battleship(user):
 
     print(' ')
     print('--------------------------------------')
+    time.sleep(1)
 
     computer_row5 = ['  5', '-', '-', '-', '-', '-']
     computer_row4 = ['  4', '-', '-', '-', '-', '-']
@@ -171,7 +202,8 @@ def play_battleship(user):
     print(*computer_xcolumn, sep=' ')
 
     print(' ')
-    print('--------------------------------------')
+    print('--------------------------------------\n')
+    time.sleep(1)
 
     computer_ships_locations = []
     player_ships_locations = []
@@ -207,6 +239,7 @@ def score_checker(player_ships_locations, computer_ships_locations, players_inpu
         print(' ')
         print(f"{user} has {len(player_ships_locations)} ships left")
         print(f"Computer has {len(computer_ships_locations)} ships left\n")
+        time.sleep(1)
 
         if coordinates_entered(
             player_ships_locations, computer_ships_locations,
@@ -306,6 +339,8 @@ def outcome(move, board_layout, hit, name, oppositons_name):
     else:
         board_layout[y][x] = 'O'
         move_outcome = 'Miss'
+    
+    time.sleep(1)
 
     print('--------------------------------------')
     print(F"{oppositons_name}'s ships locations\n")
@@ -321,6 +356,7 @@ def outcome(move, board_layout, hit, name, oppositons_name):
     print(' ')
     print(f"{name} has fired upon: {move} its a {move_outcome}")
     print('--------------------------------------')
+    time.sleep(1)
 
 
 def results(result, user):
@@ -379,12 +415,13 @@ def main():
     Runs all functions
     """
     user = login_choice()
-    play = True
-    while play is True:
-        ship_location = play_battleship(user)
-        result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
-        results(result, user)
-        play = still_playing()
+    if user != 'q' and user != 'Q':
+        play = True
+        while play is True:
+            ship_location = play_battleship(user)
+            result = score_checker(ship_location[0], ship_location[1], ship_location[2], ship_location[3], ship_location[4], ship_location[5], user)
+            results(result, user)
+            play = still_playing()
 
 
 print('Welcome lets play Battleships!')
