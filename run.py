@@ -24,7 +24,7 @@ def login_choice():
         print('Please select a login option\n')
         print('Login [L]')
         print('Create an account [C]')
-        print('Log in as a guess [G]\n')
+        print('Log in as a guest [G]\n')
         print('If you would like to quit the game at any time please enter [Q].\n')
 
         option = input('Please enter your option here:\n')
@@ -37,7 +37,7 @@ def login_choice():
             valid_login = True
         elif option == 'G' or option == 'g':
             valid_login = True
-            user = 'Guess'
+            user = 'Guest'
         elif option == 'Q' or option == 'q':
             print(f"You have entered {option} to quit the game. Hope you come back soon!")
             return 'Q'
@@ -370,7 +370,7 @@ def results(result, user):
     """
     score = SHEET.worksheet('score')
 
-    if user != 'Guess':
+    if user != 'Guest':
         username_place = score.col_values(1).index(user)
         win = score.col_values(2)[username_place]
         lose = score.col_values(3)[username_place]
@@ -378,18 +378,18 @@ def results(result, user):
 
     if result == 'W':
         print(f"Congratulations {user} you won!")
-        if user != 'Guess':
+        if user != 'Guest':
             win = int(win) + 1
     elif result == 'L':
         print(f"Better luck next time {user} you lost :(")
-        if user != 'Guess':
+        if user != 'Guest':
             lose = int(lose) + 1
     elif result == 'D':
         print(f"So close {user} you drew!")
-        if user != 'Guess':
+        if user != 'Guest':
             draw = int(draw) + 1
 
-    if user != 'Guess' and result != 'Q':
+    if user != 'Guest' and result != 'Q':
         print(f"\nwins: {win}\nLoses: {lose}\nDraws: {draw}")
 
         score.update('B' + str(username_place+1), win)
