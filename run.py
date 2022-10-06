@@ -225,7 +225,7 @@ def ship_generator():
     return ships
 
 
-def score_checker(ship_location, user):
+def score_checker(ship_data, user):
     """
     Function takes the player and computer ship lists and counts the list,
     and while both have a length greater than 0 ships left the game
@@ -233,29 +233,29 @@ def score_checker(ship_location, user):
     ends without the player quitting it will also calculate if the player
     won, lost, or drew
     """
-    while len(ship_location[0]) > 0 and len(ship_location[1]) > 0:
+    while len(ship_data[0]) > 0 and len(ship_data[1]) > 0:
         print(' ')
-        print(f"{user} has {len(ship_location[0])} ships left")
-        print(f"Computer has {len(ship_location[1])} ships left\n")
+        print(f"{user} has {len(ship_data[0])} ships left")
+        print(f"Computer has {len(ship_data[1])} ships left\n")
         time.sleep(1)
 
-        if coordinates_entered(ship_location, user) == 'Q':
+        if coordinates_entered(ship_data, user) == 'Q':
             print(
-                f"Your remaining ships were located at: {ship_location[0]}\nThe computers remaining ships were located at: {ship_location[1]}\n"
+                f"Your remaining ships were located at: {ship_data[0]}\nThe computers remaining ships were located at: {ship_data[1]}\n"
                 )
             return 'Q'
 
-    if len(ship_location[0]) != 0 and len(ship_location[1]) == 0:
-        print(f"Your remaining ships were located at: {ship_location[0]}\n")
+    if len(ship_data[0]) != 0 and len(ship_data[1]) == 0:
+        print(f"Your remaining ships were located at: {ship_data[0]}\n")
         return 'W'
-    if len(ship_location[1]) != 0 and len(ship_location[0]) == 0:
-        print(f"The computers remaining ships were located at: {ship_location[1]}\n")
+    if len(ship_data[1]) != 0 and len(ship_data[0]) == 0:
+        print(f"The computers remaining ships were located at: {ship_data[1]}\n")
         return 'L'
-    if len(ship_location[0]) == 0 and len(ship_location[1]) == 0:
+    if len(ship_data[0]) == 0 and len(ship_data[1]) == 0:
         return 'D'
 
 
-def coordinates_entered(ship_location, user):
+def coordinates_entered(ship_data, user):
     """
     Takes the players input and generates the computers moves for each turn
     """
@@ -266,13 +266,13 @@ def coordinates_entered(ship_location, user):
         if move == 'Q' or move == 'q':
             return 'Q'
 
-        coordinates_not_valid = move_checker(move, ship_location[2])
+        coordinates_not_valid = move_checker(move, ship_data[2])
 
-    com_move = ship_location[3].pop(random.randrange(len(ship_location[3])))
+    com_move = ship_data[3].pop(random.randrange(len(ship_data[3])))
     computer = 'Computer'
 
-    hit_or_miss(move, ship_location[1], ship_location[4], user, computer)
-    hit_or_miss(com_move, ship_location[0], ship_location[5], computer, user)
+    hit_or_miss(move, ship_data[1], ship_data[4], user, computer)
+    hit_or_miss(com_move, ship_data[0], ship_data[5], computer, user)
 
 
 def move_checker(move, players_input_moves):
@@ -413,8 +413,8 @@ def main():
     if user != 'q' and user != 'Q':
         play = True
         while play is True:
-            ship_location = play_battleship(user)
-            result = score_checker(ship_location, user)
+            ship_data = play_battleship(user)
+            result = score_checker(ship_data, user)
             results(result, user)
             play = still_playing()
 
