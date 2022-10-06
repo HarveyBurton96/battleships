@@ -29,16 +29,16 @@ def login_choice():
 
         option = input('Please enter your option here:\n')
 
-        if option == 'L' or option == 'l':
+        if option in ('L', 'l'):
             user = log_in()
             valid_login = True
-        elif option == 'C' or option == 'c':
+        elif option in ('C', 'c'):
             user = create_login()
             valid_login = True
-        elif option == 'G' or option == 'g':
+        elif option in ('G', 'g'):
             valid_login = True
             user = 'Guest'
-        elif option == 'Q' or option == 'q':
+        elif option in ('Q', 'q'):
             print(f"You have entered {option} to quit the game. Hope you come back soon!")
             return 'Q'
         else:
@@ -65,7 +65,7 @@ def log_in():
 
         if username in username_data:
             x += 1
-        elif username == 'q' or username == 'Q':
+        elif username in ('q', 'Q'):
             print(f"You have entered {username} to quit the game. Hope you come back soon!")
             return 'Q'
         else:
@@ -118,7 +118,7 @@ def create_login():
                 f"Please select another username as '{username}' is not valid.\n"
                 )
             x -= 1
-        elif username == 'q' or username == 'Q':
+        elif username in ('q', 'Q'):
             print(f"You have entered {username} to quit the game. Hope you come back soon!")
             return 'Q'
     p = 0
@@ -132,10 +132,9 @@ def create_login():
                 f"Please select another password as '{password}' is not valid.\n"
                 )
             x -= 1
-        elif password == 'q' or password == 'Q':
+        elif password in ('q', 'Q'):
             print(f"You have entered {password} to quit the game. Hope you come back soon!")
             return 'Q'
-    
 
     new_user = [username, password]
     new_user_score = [username, 0, 0, 0]
@@ -254,21 +253,21 @@ def score_checker(player_ships_locations, computer_ships_locations, players_inpu
                 f"Your remaining ships were located at: {player_ships_locations}\nThe computers remaining ships were located at: {computer_ships_locations}\n"
                 )
             return 'Q'
-    
+
     if len(player_ships_locations) != 0 and len(computer_ships_locations) == 0:
         print(f"Your remaining ships were located at: {player_ships_locations}\n")
         return 'W'
-    elif len(computer_ships_locations) != 0 and len(player_ships_locations) == 0:
+    if len(computer_ships_locations) != 0 and len(player_ships_locations) == 0:
         print(f"The computers remaining ships were located at: {computer_ships_locations}\n")
         return 'L'
-    elif len(player_ships_locations) == 0 and len(computer_ships_locations) == 0:
+    if len(player_ships_locations) == 0 and len(computer_ships_locations) == 0:
         return 'D'
 
 
 def coordinates_entered(player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board, user):
     """
     Takes players and computers moves for each turn
-    """ 
+    """
     coordinates_not_valid = True
     while coordinates_not_valid is True:
         move = input("Please enter your move here, with column (x) then row (y) \nseparated by a ',' i.e. x,y:\n")
@@ -287,7 +286,7 @@ def coordinates_entered(player_ships_locations, computer_ships_locations, player
 
 def move_checker(move, players_input_moves):
     """
-    Checks the players input moves for input being a number and within 
+    Checks the players input moves for input being a number and within
     the range of the board and have only entered 2 coordinates
     """
     ranges = range(1, 6)
@@ -343,7 +342,7 @@ def outcome(move, board_layout, hit, name, oppositons_name):
     else:
         board_layout[y][x] = 'O'
         move_outcome = 'Miss'
-    
+
     time.sleep(1)
 
     print('--------------------------------------')
@@ -404,14 +403,14 @@ def still_playing():
     playing = True
     while playing is True:
         decision = input("Would you like to play another game? \nEnter [P] to play another\nEnter [Q] to quite to the game\n")
-        
-        if decision == 'P' or decision == 'p':
+
+        if decision in ('P', 'p'):
             return True
-        elif decision == 'Q' or decision == 'q':
+        if decision in ('Q', 'q'):
             print('Thank you for playing!')
             return False
-        else:
-            print(f"The input has not been recognised you have entered: {decision}, Please try again.\n")       
+
+        print(f"The input has not been recognised you have entered: {decision}, Please try again.\n")
 
 
 def main():
