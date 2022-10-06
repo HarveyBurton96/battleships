@@ -53,18 +53,18 @@ def log_in():
     """
     For users with an existing account will enter their details here
     """
-    x = 0
+    acceptable_username = True
 
     login = SHEET.worksheet('login')
 
     username_data = login.col_values(1)
     password_data = login.col_values(2)
 
-    while x == 0:
+    while acceptable_username is True:
         username = input('Please enter your username here:\n')
 
         if username in username_data:
-            x += 1
+            acceptable_username = False
         elif username in ('q', 'Q'):
             print(f"You have entered {username} to quit the game. Hope you come back soon!")
             return 'Q'
@@ -73,13 +73,13 @@ def log_in():
 
     username_place = username_data.index(username)
 
-    y = 0
-    while y == 0:
+    acceptable_password = True
+    while acceptable_password is True:
         password = input('Please enter your password here:\n')
 
         if password == password_data[username_place]:
             print(f"Welcome back {username}")
-            y += 1
+            acceptable_password = False
         elif password == 'q' or password == 'Q':
             print(f"You have entered {password} to quit the game. Hope you come back soon!")
             return 'Q'
@@ -103,35 +103,35 @@ def create_login():
 
     username_data = login.col_values(1)
 
-    x = 0
+    acceptable_username = True
 
-    while x == 0:
+    while acceptable_username is True:
         username = input('Please enter your username here:\n')
-        x += 1
+        acceptable_username = False
         if username in username_data:
             print(
                 f"Please select another username as '{username}' has already been selected.\n"
                 )
-            x -= 1
+            acceptable_username = True
         elif username.count(' ') >= 1 or username == '':
             print(
                 f"Please select another username as '{username}' is not valid.\n"
                 )
-            x -= 1
+            acceptable_username = True
         elif username in ('q', 'Q'):
             print(f"You have entered {username} to quit the game. Hope you come back soon!")
             return 'Q'
-    p = 0
 
-    while p == 0:
+    acceptable_password = True
+
+    while acceptable_password is True:
         password = input('Please enter your password here:\n')
-        p += 1
-        
+        acceptable_password = False
         if password.count(' ') >= 1 or password == '':
             print(
                 f"Please select another password as '{password}' is not valid.\n"
                 )
-            x -= 1
+            acceptable_password = True
         elif password in ('q', 'Q'):
             print(f"You have entered {password} to quit the game. Hope you come back soon!")
             return 'Q'
@@ -152,64 +152,39 @@ def play_battleship(user):
     print('Lets play battleships!\n')
     time.sleep(1)
 
-    player_row5 = ['  5', '-', '-', '-', '-', '-']
-    player_row4 = ['  4', '-', '-', '-', '-', '-']
-    player_row3 = ['y 3', '-', '-', '-', '-', '-']
-    player_row2 = ['  2', '-', '-', '-', '-', '-']
-    player_row1 = ['  1', '-', '-', '-', '-', '-']
-    player_xcolumn_numbers = ['   ', '1', '2', '3', '4', '5']
-    player_xcolumn = ['   ', ' ', ' ', 'x', ' ', ' ']
-
-    player_board = [
-        player_xcolumn_numbers, player_row1, player_row2, player_row3,
-        player_row4, player_row5, player_xcolumn
-        ]
+    player_board = build_board()
+    computer_board = build_board()
 
     print('--------------------------------------')
     print("Computer's ships locations\n")
 
-    print(*player_row5, sep=' ')
-    print(*player_row4, sep=' ')
-    print(*player_row3, sep=' ')
-    print(*player_row2, sep=' ')
-    print(*player_row1, sep=' ')
-    print(*player_xcolumn_numbers, sep=' ')
-    print(*player_xcolumn, sep=' ')
+    print(*player_board[5], sep=' ')
+    print(*player_board[4], sep=' ')
+    print(*player_board[3], sep=' ')
+    print(*player_board[2], sep=' ')
+    print(*player_board[1], sep=' ')
+    print(*player_board[0], sep=' ')
+    print(*player_board[6], sep=' ')
 
     print(' ')
     print('--------------------------------------')
     time.sleep(1)
 
-    computer_row5 = ['  5', '-', '-', '-', '-', '-']
-    computer_row4 = ['  4', '-', '-', '-', '-', '-']
-    computer_row3 = ['y 3', '-', '-', '-', '-', '-']
-    computer_row2 = ['  2', '-', '-', '-', '-', '-']
-    computer_row1 = ['  1', '-', '-', '-', '-', '-']
-    computer_xcolumn_numbers = ['   ', '1', '2', '3', '4', '5']
-    computer_xcolumn = ['   ', ' ', ' ', 'x', ' ', ' ']
-
-    computer_board = [
-        computer_xcolumn_numbers, computer_row1, computer_row2,
-        computer_row3, computer_row4, computer_row5, computer_xcolumn
-        ]
-
     print('--------------------------------------')
     print(f"{user}'s ships locations\n")
 
-    print(*computer_row5, sep=' ')
-    print(*computer_row4, sep=' ')
-    print(*computer_row3, sep=' ')
-    print(*computer_row2, sep=' ')
-    print(*computer_row1, sep=' ')
-    print(*computer_xcolumn_numbers, sep=' ')
-    print(*computer_xcolumn, sep=' ')
+    print(*computer_board[5], sep=' ')
+    print(*computer_board[4], sep=' ')
+    print(*computer_board[3], sep=' ')
+    print(*computer_board[2], sep=' ')
+    print(*computer_board[1], sep=' ')
+    print(*computer_board[0], sep=' ')
+    print(*computer_board[6], sep=' ')
 
     print(' ')
     print('--------------------------------------\n')
     time.sleep(1)
 
-    computer_ships_locations = []
-    player_ships_locations = []
     players_input_moves = []
     computer_potential_moves = [
         '1,5', '3,4', '1,1', '2,3', '1,4',
@@ -219,17 +194,33 @@ def play_battleship(user):
         '1,2', '5,4', '2,5', '1,3', '5,2'
         ]
 
-    while len(player_ships_locations) < 5:
-        num1 = str(random.randint(1, 5)) + ',' + str(random.randint(1, 5))
-        if num1 not in player_ships_locations:
-            player_ships_locations.append(num1)
-
-    while len(computer_ships_locations) < 5:
-        num2 = str(random.randint(1, 5)) + ',' + str(random.randint(1, 5))
-        if num2 not in computer_ships_locations:
-            computer_ships_locations.append(num2)
+    player_ships_locations = ship_generator()
+    computer_ships_locations = ship_generator()
 
     return player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board
+
+
+def build_board():
+    """Generates the starting board which is blank"""
+    board = [
+        ['   ', '1', '2', '3', '4', '5'],
+        ['  1', '-', '-', '-', '-', '-'],
+        ['  2', '-', '-', '-', '-', '-'],
+        ['y 3', '-', '-', '-', '-', '-'],
+        ['  4', '-', '-', '-', '-', '-'],
+        ['  5', '-', '-', '-', '-', '-'],
+        ['   ', ' ', ' ', 'x', ' ', ' ']]
+    return board
+
+
+def ship_generator():
+    """Generates random locations for ships"""
+    ships = []
+    while len(ships) < 5:
+        num1 = str(random.randint(1, 5)) + ',' + str(random.randint(1, 5))
+        if num1 not in ships:
+            ships.append(num1)
+    return ships
 
 
 def score_checker(player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board, user):
@@ -244,11 +235,7 @@ def score_checker(player_ships_locations, computer_ships_locations, players_inpu
         print(f"Computer has {len(computer_ships_locations)} ships left\n")
         time.sleep(1)
 
-        if coordinates_entered(
-            player_ships_locations, computer_ships_locations,
-            players_input_moves, computer_potential_moves, player_board,
-            computer_board, user
-            ) == 'Q':
+        if coordinates_entered(player_ships_locations, computer_ships_locations, players_input_moves, computer_potential_moves, player_board, computer_board, user) == 'Q':
             print(
                 f"Your remaining ships were located at: {player_ships_locations}\nThe computers remaining ships were located at: {computer_ships_locations}\n"
                 )
