@@ -62,7 +62,7 @@ The aim for the user is to try and locate the computers ships before the compute
 
 I have manually tested this project by: 
 - Checking the validation embedded in the [Code institute org/ python essentials template.](https://github.com/Code-Institute-Org/python-essentials-template)
-    - All issues have been resolved baring the 'line too long' but this issue doesn't affect the game.
+    - All issues have been resolved baring the 'line too long' and 'Missing module docstring' but these issues don't affect the game.
 - Checked the inputs by giving invalid inputs that were: empty inputs, numbers greater than the range, and invalid strings.
 - The program was tested in my local terminal and the Code Institute Heroku terminal.
 
