@@ -39,12 +39,12 @@ def login_choice():
             valid_login = True
             user = 'Guest'
         elif option in ('Q', 'q'):
-            print(f"You have entered {option} to quit the game. Hope you come back soon!")
+            print(f"You have entered {option} to quit the game.")
+            print("Hope you come back soon!")
             return 'Q'
         else:
-            print(
-                f"Please check as the input you have supplied is not a valid option you have enter: {option}, please try again.\n"
-            )
+            print("Please check as the input you have supplied is not a valid")
+            print(f"option you have enter: {option}, please try again.\n")
 
     return user
 
@@ -66,7 +66,8 @@ def log_in():
         if username in username_data:
             acceptable_username = False
         elif username in ('q', 'Q'):
-            print(f"You have entered {username} to quit the game. Hope you come back soon!")
+            print(f"You have entered {username} to quit the game.")
+            print("Hope you come back soon!")
             return 'Q'
         else:
             print(f"Username: '{username}', is not recognised please try again\n")
@@ -81,7 +82,8 @@ def log_in():
             print(f"Welcome back {username}")
             acceptable_password = False
         elif password == 'q' or password == 'Q':
-            print(f"You have entered {password} to quit the game. Hope you come back soon!")
+            print(f"You have entered {password} to quit the game.")
+            print("Hope you come back soon!")
             return 'Q'
         else:
             print(f"Password: {password}, is not recognised please try again")
@@ -119,7 +121,8 @@ def create_login():
                 )
             acceptable_username = True
         elif username in ('q', 'Q'):
-            print(f"You have entered {username} to quit the game. Hope you come back soon!")
+            print(f"You have entered {username} to quit the game.")
+            print("Hope you come back soon!")
             return 'Q'
 
     acceptable_password = True
@@ -133,7 +136,8 @@ def create_login():
                 )
             acceptable_password = True
         elif password in ('q', 'Q'):
-            print(f"You have entered {password} to quit the game. Hope you come back soon!")
+            print(f"You have entered {password} to quit the game.")
+            print("Hope you come back soon!")
             return 'Q'
 
     new_user = [username, password]
@@ -240,9 +244,8 @@ def score_checker(ship_data, user):
         time.sleep(1)
 
         if coordinates_entered(ship_data, user) == 'Q':
-            print(
-                f"Your remaining ships were located at: {ship_data[0]}\nThe computers remaining ships were located at: {ship_data[1]}\n"
-                )
+            print(f"Your remaining ships were located at: {ship_data[0]}")
+            print(f"The computers remaining ships were located at: {ship_data[1]}\n")
             return 'Q'
 
     if len(ship_data[0]) != 0 and len(ship_data[1]) == 0:
@@ -286,22 +289,27 @@ def move_checker(move, players_input_moves):
 
     try:
         if len(moves) != 2:
-            print(f"\nIncorrect amount of coordinates have been entered, you have entered: {len(moves)} coordinates. Please only enter 2 coordinates\n")
+            print("\nIncorrect amount of coordinates have been entered,")
+            print(f"you have entered: {len(moves)} coordinates. Please only")
+            print("enter 2 coordinates\n")
         elif moves[0].isnumeric() is False:
             print(f"\nx coordinate is not a number you have entered: {moves[0]}\n")
         elif moves[1].isnumeric() is False:
             print(f"\ny coordinate is not a number you have entered: {moves[1]}\n")
         elif int(moves[0]) not in ranges:
-            print(f"\nx coordinate is not a number on the board, you have entered: {moves[0]}\n")
+            print("\nx coordinate is not a number on the board,")
+            print(f"you have entered: {moves[0]}\n")
         elif int(moves[1]) not in ranges:
-            print(f"\ny coordinate is not a number on the board, you have entered: {moves[1]}\n")
+            print("\ny coordinate is not a number on the board,")
+            print(f"you have entered: {moves[1]}\n")
         elif move in players_input_moves:
             print(f"\nYou have already fired upon these coordinates: {moves}\n")
         else:
             players_input_moves.append(move)
             return False
     except ValueError:
-        print(f"\nPlease check as your input was not a valid coordinates, you entered: {moves}\n")
+        print("\nPlease check as your input was not a valid coordinates,")
+        print(f"you entered: {moves}\n")
 
     return True
 
@@ -402,7 +410,8 @@ def still_playing():
             print('Thank you for playing!')
             return False
 
-        print(f"The input has not been recognised you have entered: {decision}, Please try again.\n")
+        print(f"The input has not been recognised, you have entered: {decision},")
+        print("Please try again.\n")
 
 
 def main():
