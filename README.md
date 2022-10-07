@@ -54,6 +54,10 @@ The aim for the user is to try and locate the computers ships before the compute
 
     ![Board screenshot](assets/images/board%20screenshot.png)
 
+## Flow chart
+
+![Flow chart](assets/images/Flow%20chart.png)
+
 ## Testing
 
 I have manually tested this project by: 
