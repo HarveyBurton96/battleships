@@ -27,7 +27,7 @@ The aim for the user is to try and locate the computers ships before the compute
 
     - If the user chooses the loh in option then text is displayed to let the user know that their username and password are case sensitive. 
 
-    
+    ![Login screenshot](assets/images/account%20log%20in.png)
 
 - ### Generating random ship locations
     - The game is set on a 5 by 5 grid and both players start with 5 ships.
