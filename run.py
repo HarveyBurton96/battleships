@@ -66,7 +66,7 @@ def log_in():
     username_data = login.col_values(1)
     password_data = login.col_values(2)
 
-    print("Please note for your username and password that they are case sesitive")
+    print("Please note for your username and password that they are case sensitive")
 
     while acceptable_username is True:
         username = input('Please enter your username here:\n')

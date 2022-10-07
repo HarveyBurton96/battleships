@@ -25,7 +25,7 @@ The aim for the user is to try and locate the computers ships before the compute
 
     ![Login screenshot](assets/images/loggin%20options.png)
 
-    - If the user chooses the loh in option then text is displayed to let the user know that their username and password are case sestitive. 
+    - If the user chooses the loh in option then text is displayed to let the user know that their username and password are case sensitive. 
 
     
 
