@@ -66,6 +66,8 @@ def log_in():
     username_data = login.col_values(1)
     password_data = login.col_values(2)
 
+    print("Please note for your username and password that they are case sesitive")
+
     while acceptable_username is True:
         username = input('Please enter your username here:\n')
 
@@ -103,7 +105,6 @@ def create_login():
     will save the username and password to the spreadsheet as well as
     creating their scores
     """
-    print('Thank you for creating an account')
     time.sleep(1)
 
     login = SHEET.worksheet('login')
@@ -130,6 +131,9 @@ def create_login():
             print(f"You have entered {username} to quit the game.")
             print("Hope you come back soon!")
             return 'Q'
+    
+    print('Thank you for creating an account')
+    time.sleep(1)
 
     acceptable_password = True
 

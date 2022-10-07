@@ -25,6 +25,10 @@ The aim for the user is to try and locate the computers ships before the compute
 
     ![Login screenshot](assets/images/loggin%20options.png)
 
+    - If the user chooses the loh in option then text is displayed to let the user know that their username and password are case sestitive. 
+
+    
+
 - ### Generating random ship locations
     - The game is set on a 5 by 5 grid and both players start with 5 ships.
     - Each 5 ships are randomly assigned 5 coordinates for each player. 
@@ -37,6 +41,10 @@ The aim for the user is to try and locate the computers ships before the compute
     - If the user has created an account, it will then add one to if the user won/ lost/ drew and will then display the total wins, loses, and draws.
 
     ![Result screenshot](assets/images/results.png)
+
+    - If the user has used the guest log in option then the total wins, loses, and draws will not display and they will just receive the win, lost, or draw text.
+
+    ![guest score screenshot](assets/images/guest%20score.png)
 
 - ### Input validation
     - The game will keep a track of which coordinates the players have already fired upon and display a reject message if they enter the same coordinates twice. 
