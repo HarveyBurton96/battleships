@@ -10,16 +10,16 @@ The aim for the user is to try and locate the computers ships before the compute
 
 ## The rules
 - Battleships is a classic game that has been enjoyed even when it was a simple pencil and paper game. 
-- To objective of the game is to sink the other players ships before they sink yours. 
+- The objective of the game is to sink the other players ships before they sink yours. 
 - Each player takes a turn to guess the location where the oppositions ships are hidden. 
-- This continues until one player’s ships have been hit. 
+- This continues until all a player’s ships have been hit. 
 - The winner is the player with ships remaining.  
 
 ## Features
 
 - ### Creating and/or logging into existing account
     - This allows players to create an account and choose the username that they wish to be referred to while playing. 
-    - Each username is unique so if it has already been taken the player will need to choice a different one. 
+    - Each username is unique so if it has already been taken the player will need to choose a different one. 
     - They also create a password to keep their account secure and will need both username and password to be able to log into an existing account. 
     - There is also a guest option for players who do not wish to have an account.
 
@@ -66,18 +66,27 @@ I have manually tested this project by:
 - Checked the inputs by giving invalid inputs that were: empty inputs, numbers greater than the range, and invalid strings.
 - The program was tested in my local terminal and the Code Institute Heroku terminal.
 
+## Libraries used
+
+In this project I used 4 libraries:
+
+- The random library was imported to produce the random numbers for the ship coordinates and to choose the computers next move.
+- The time library was imported to use the sleep function to slow the speed of the text being printed.
+- The gspread was imported to manipulate the spreadsheet containing the username and passwords and the users scores.
+- The google.oauth2.service_account import Credentials was used to connect the code to the Microsoft spreadsheet. 
+
 ## Bug
 
 When testing the project, I noticed that sometimes the game wouldn't end even after every coordinate had been fired on. After investigating I discovered the random numbers were generating randomly twice. This explained why the error was not appearing every time I tested the game.
 
 ![Pre bug fix screenshot](assets/images/pre%20bug%20fix.png)
 
-I was able to solve this issue by checking the generated coordinates had not already been generated for that round. I also moved the code into its own function to reduce the repeating code.
+I was able to solve this issue by checking the generated coordinates had not already been generated for that round. I also moved the code into its own function to reduce the repeating code and to incorporate Object-oriented programming method. 
 
 ![Post bug fix screenshot](assets/images/post%20bug%20fix.png)
 
 
-When testing I also found an issue where if the game reached the final few spots on the board the run time would take a while. This was because I had originally set up the computer to randomly generate moves the same way I generated the ship placement. This meant that when there was only a few valid options it would take a long time to randomly land on those unused coordinates. To resolve this issue, I simply gave the computer all the possible moves at the start and let it randomly use and remove the remaining coordinates. This drastically increased the run time for the game in the later stages. 
+When testing I also found an issue where if the game reached the final few spots on the board the run time would take a while. This was because I had originally set up the computer to randomly generate moves the same way I generated the ship placement. This meant that when there were only a few valid options it would take a long time to randomly land on those unused coordinates. To resolve this issue, I simply gave the computer all the possible moves at the start and let it randomly use and remove the remaining coordinates. This drastically increased the run time for the game in the later stages. 
 
 ![Computer move generator list screenshot](assets/images/computer%20move%20generator%201.png)
 

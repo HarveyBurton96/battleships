@@ -1,6 +1,12 @@
-import gspread
 import random
 import time
+
+# The code from line 9 to 21 is not my own and is from the code institute
+# Love sandwiches project. The video is located here:
+# https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+2021_T1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/c92755338ef548f28cc31a7c3d5bfb46/
+# The code is also available in a repository I created as I followed along
+# the guide located here: https://github.com/HarveyBurton96/love-sandwiches
+import gspread
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
