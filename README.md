@@ -64,7 +64,7 @@ The aim for the user is to try and locate the computers ships before the compute
 
 ## Flow chart
 
-![Flow chart](assets/images/Flow%20chart.png)
+![Flow chart](assets/images/flow%20chart.png)
 
 ## Testing
 
