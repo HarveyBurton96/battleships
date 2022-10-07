@@ -162,21 +162,6 @@ def play_battleship(user):
     computer_board = build_board()
 
     print('--------------------------------------')
-    print("Computer's ships locations\n")
-
-    print(*player_board[5], sep=' ')
-    print(*player_board[4], sep=' ')
-    print(*player_board[3], sep=' ')
-    print(*player_board[2], sep=' ')
-    print(*player_board[1], sep=' ')
-    print(*player_board[0], sep=' ')
-    print(*player_board[6], sep=' ')
-
-    print(' ')
-    print('--------------------------------------')
-    time.sleep(1)
-
-    print('--------------------------------------')
     print(f"{user}'s ships locations\n")
 
     print(*computer_board[5], sep=' ')
@@ -186,6 +171,21 @@ def play_battleship(user):
     print(*computer_board[1], sep=' ')
     print(*computer_board[0], sep=' ')
     print(*computer_board[6], sep=' ')
+
+    print(' ')
+    print('--------------------------------------')
+    time.sleep(1)
+
+    print('--------------------------------------')
+    print("Computer's ships locations\n")
+
+    print(*player_board[5], sep=' ')
+    print(*player_board[4], sep=' ')
+    print(*player_board[3], sep=' ')
+    print(*player_board[2], sep=' ')
+    print(*player_board[1], sep=' ')
+    print(*player_board[0], sep=' ')
+    print(*player_board[6], sep=' ')
 
     print(' ')
     print('--------------------------------------\n')
@@ -274,8 +274,8 @@ def coordinates_entered(ship_data, user):
     com_move = ship_data[3].pop(random.randrange(len(ship_data[3])))
     computer = 'Computer'
 
-    hit_or_miss(move, ship_data[1], ship_data[4], user, computer)
     hit_or_miss(com_move, ship_data[0], ship_data[5], computer, user)
+    hit_or_miss(move, ship_data[1], ship_data[4], user, computer)
 
 
 def move_checker(move, players_input_moves):
