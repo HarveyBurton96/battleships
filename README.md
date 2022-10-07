@@ -40,7 +40,7 @@ The aim for the user is to try and locate the computers ships before the compute
 
 - ### Input validation
     - The game will keep a track of which coordinates the players have already fired upon and display a reject message if they enter the same coordinates twice. 
-    - The game also checks that two numbers separated by a comma within the range of 1 to 5, i.e., the possible coordinates of the board. 
+    - The game also checks that two numbers are separated by a comma within the range of 1 to 5 which are the possible coordinates of the board. 
 
     ![Previously fired coordinates screenshot](assets/images/input%20error.png)
 
@@ -61,7 +61,7 @@ The aim for the user is to try and locate the computers ships before the compute
 ## Testing
 
 I have manually tested this project by: 
-- Checking the validation embedded in the [Code institute org/ python essentials template](https://github.com/Code-Institute-Org/python-essentials-template)
+- Checking the validation embedded in the [Code institute org/ python essentials template.](https://github.com/Code-Institute-Org/python-essentials-template)
     - All issues have been resolved baring the 'line too long' but this issue doesn't affect the game.
 - Checked the inputs by giving invalid inputs that were: empty inputs, numbers greater than the range, and invalid strings.
 - The program was tested in my local terminal and the Code Institute Heroku terminal.
