@@ -131,7 +131,7 @@ def create_login():
             print(f"You have entered {username} to quit the game.")
             print("Hope you come back soon!")
             return 'Q'
-    
+
     print('Thank you for creating an account')
     time.sleep(1)
 
