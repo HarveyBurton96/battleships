@@ -132,9 +132,6 @@ def create_login():
             print("Hope you come back soon!")
             return 'Q'
 
-    print('Thank you for creating an account')
-    time.sleep(1)
-
     acceptable_password = True
 
     while acceptable_password is True:
@@ -155,6 +152,9 @@ def create_login():
 
     login.append_row(new_user)
     score.append_row(new_user_score)
+
+    print('Thank you for creating an account')
+    time.sleep(1)
 
     return username
 
